@@ -4000,11 +4000,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj",
+      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj",
       "projectName": "Youth Innovation System.Core",
-      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj",
+      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj",
       "packagesPath": "C:\\Users\\MICHEAL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Core\\obj\\",
+      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4024,8 +4024,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj": {
-              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj"
+            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj": {
+              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj"
             }
           }
         }

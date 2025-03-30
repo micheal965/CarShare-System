@@ -1,22 +1,19 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\",
+  "WorkspaceRootPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\youth-innovation-system\\youth innovation system\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|solutionrelative:youth innovation system\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System\\Controllers\\ChatController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\youth-innovation-system\\youth innovation system.service\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\youth-innovation-system\\youth innovation system.service\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7C300ECC-85EB-40CF-A2A7-0C9545D4F245}|Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj|c:\\users\\micheal\\onedrive\\desktop\\youth-innovation-system\\youth innovation system.repository\\identity\\usersseeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7C300ECC-85EB-40CF-A2A7-0C9545D4F245}|Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj|c:\\users\\micheal\\onedrive\\desktop\\carshare\\youth-innovation-system\\youth innovation system.repository\\identity\\usersseeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C300ECC-85EB-40CF-A2A7-0C9545D4F245}|Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj|solutionrelative:youth innovation system.repository\\identity\\usersseeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\Hubs\\ChatHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\ChatService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +39,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "UsersSeeding.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
               "RelativeDocumentMoniker": "Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
               "RelativeToolTip": "Youth Innovation System.Repository\\Identity\\UsersSeeding.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -57,10 +54,10 @@
               "DocumentIndex": 0,
               "Title": "ChatController.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "..\\..\\Youth-Innovation-System\\Youth Innovation System\\Controllers\\ChatController.cs",
               "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "Youth Innovation System\\Controllers\\ChatController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAgwCsAAABfAAAAAAAAAA==",
+              "RelativeToolTip": "..\\..\\Youth-Innovation-System\\Youth Innovation System\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACsAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-17T06:56:16.16Z",
               "EditorCaption": ""
@@ -70,13 +67,12 @@
               "DocumentIndex": 2,
               "Title": "ChatHub.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\Hubs\\ChatHub.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System.Service\\Hubs\\ChatHub.cs",
+              "RelativeDocumentMoniker": "..\\..\\Youth-Innovation-System\\Youth Innovation System.Service\\Hubs\\ChatHub.cs",
               "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\Hubs\\ChatHub.cs",
-              "RelativeToolTip": "Youth Innovation System.Service\\Hubs\\ChatHub.cs",
+              "RelativeToolTip": "..\\..\\Youth-Innovation-System\\Youth Innovation System.Service\\Hubs\\ChatHub.cs",
               "ViewState": "AgIAAEwAAAAAAAAAAAAkwF8AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T03:50:12.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T03:50:12.484Z"
             }
           ]
         },
@@ -86,12 +82,12 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ChatService.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\ChatService.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System.Service\\ChatService.cs",
+              "RelativeDocumentMoniker": "..\\..\\Youth-Innovation-System\\Youth Innovation System.Service\\ChatService.cs",
               "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Youth-Innovation-System\\Youth Innovation System.Service\\ChatService.cs",
-              "RelativeToolTip": "Youth Innovation System.Service\\ChatService.cs",
+              "RelativeToolTip": "..\\..\\Youth-Innovation-System\\Youth Innovation System.Service\\ChatService.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-17T07:39:16.387Z",
