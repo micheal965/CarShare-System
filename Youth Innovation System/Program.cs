@@ -5,7 +5,6 @@ using Youth_Innovation_System.Extensions;
 using Youth_Innovation_System.Middlewares;
 using Youth_Innovation_System.Repository.Data;
 using Youth_Innovation_System.Repository.Identity;
-using Youth_Innovation_System.Service.Hubs;
 namespace Youth_Innovation_System
 {
     public class Program
@@ -68,7 +67,7 @@ namespace Youth_Innovation_System
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapHub<ChatHub>("/chathub").RequireAuthorization();
+            //app.MapHub<ChatHub>("/chathub").RequireAuthorization();
 
             app.MapControllers();
             app.Run();

@@ -1,9 +1,9 @@
 [
   {
     "ContainingType": "Youth_Innovation_System.API.Controllers.AuthController",
-    "Method": "ConfirmEmail",
-    "RelativePath": "api/Auth/Confirm-Email",
-    "HttpMethod": "GET",
+    "Method": "ApproveAccount",
+    "RelativePath": "api/Auth/Approve-Account",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -13,8 +13,8 @@
         "IsRequired": false
       },
       {
-        "Name": "token",
-        "Type": "System.String",
+        "Name": "IsApproved",
+        "Type": "System.Boolean",
         "IsRequired": false
       }
     ],
@@ -208,123 +208,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Youth_Innovation_System.Controllers.ChatController",
-    "Method": "DeleteMessage",
-    "RelativePath": "api/Chat/Delete-Message/{messageId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "messageId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.ChatController",
-    "Method": "GetChatHistory",
-    "RelativePath": "api/Chat/Get-Chat-History/{receiverId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "receiverId",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.CommentController",
-    "Method": "CreateComment",
-    "RelativePath": "api/Comment/Create Comment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "postId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "createCommentDto",
-        "Type": "Youth_Innovation_System.Shared.DTOs.Comment.CreateCommentDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.CommentController",
-    "Method": "DeleteComment",
-    "RelativePath": "api/Comment/Delete Comment",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "commentId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.CommentController",
-    "Method": "GetAllComments",
-    "RelativePath": "api/Comment/Get All Comments",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "postId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.CommentController",
-    "Method": "GetComment",
-    "RelativePath": "api/Comment/Get Comment By Id",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "commentId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Youth_Innovation_System.Controllers.CommentController",
-    "Method": "UpdateComment",
-    "RelativePath": "api/Comment/Update Comment",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "updateCommentDto",
-        "Type": "Youth_Innovation_System.Shared.DTOs.Comment.UpdateCommentDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Youth_Innovation_System.Controllers.EmailController",
     "Method": "SendEmail",
     "RelativePath": "api/Email/Send-Email",
@@ -334,7 +217,7 @@
     "Parameters": [
       {
         "Name": "sendEmailDto",
-        "Type": "Youth_Innovation_System.Shared.DTOs.SendEmailDto",
+        "Type": "Youth_Innovation_System.Shared.DTOs.Email.SendEmailDto",
         "IsRequired": true
       }
     ],
@@ -354,8 +237,58 @@
         "IsRequired": false
       },
       {
-        "Name": "Content",
+        "Name": "Description",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CarType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Brand",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Model",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Transmission",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RentalStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvailabilityStart",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvailabilityEnd",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "RentalPrice",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
@@ -432,6 +365,58 @@
   },
   {
     "ContainingType": "Youth_Innovation_System.Controllers.PostController",
+    "Method": "ManagePost",
+    "RelativePath": "api/Post/Manage-Post/{postId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "managePostDto",
+        "Type": "Youth_Innovation_System.Shared.DTOs.Post.ManagePostDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "postId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.PostController",
+    "Method": "SearchForCars",
+    "RelativePath": "api/Post/Search-For-Cars",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "CarType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RentalPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.PostController",
     "Method": "UpdatePost",
     "RelativePath": "api/Post/Update-Post",
     "HttpMethod": "PUT",
@@ -449,14 +434,138 @@
         "IsRequired": false
       },
       {
-        "Name": "Content",
+        "Name": "Description",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CarType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Brand",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Model",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Transmission",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RentalStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvailabilityStart",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvailabilityEnd",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "RentalPrice",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
         "Name": "Images",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.RentalController",
+    "Method": "ApplyForRental",
+    "RelativePath": "api/Rental/Apply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CarId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "LicenseFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProposalFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.RentalController",
+    "Method": "GetAllPendingRentalApps",
+    "RelativePath": "api/Rental/Get-All-Pending-RentalApps/{carPostId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carPostId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.RentalController",
+    "Method": "ReviewRentalApplication",
+    "RelativePath": "api/Rental/Review",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reviewApplicationDto",
+        "Type": "Youth_Innovation_System.Shared.DTOs.Rental.ReviewApplicationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.RentalController",
+    "Method": "SubmitFeedback",
+    "RelativePath": "api/Rental/Submit-Feedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "submitFeedbackDto",
+        "Type": "Youth_Innovation_System.Shared.DTOs.Rental.SubmitFeedbackDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

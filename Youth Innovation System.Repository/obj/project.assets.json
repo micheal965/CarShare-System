@@ -7080,11 +7080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj",
+      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj",
       "projectName": "Youth Innovation System.Repository",
-      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj",
+      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Repository\\Youth Innovation System.Repository.csproj",
       "packagesPath": "C:\\Users\\MICHEAL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Repository\\obj\\",
+      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -7104,8 +7104,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj": {
-              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj"
+            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj": {
+              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Core\\Youth Innovation System.Core.csproj"
             }
           }
         }

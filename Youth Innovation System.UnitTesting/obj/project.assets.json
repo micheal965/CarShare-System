@@ -9806,11 +9806,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.UnitTesting\\Youth Innovation System.UnitTesting.csproj",
+      "projectUniqueName": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.UnitTesting\\Youth Innovation System.UnitTesting.csproj",
       "projectName": "Youth Innovation System.UnitTesting",
-      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.UnitTesting\\Youth Innovation System.UnitTesting.csproj",
+      "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.UnitTesting\\Youth Innovation System.UnitTesting.csproj",
       "packagesPath": "C:\\Users\\MICHEAL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.UnitTesting\\obj\\",
+      "outputPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.UnitTesting\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9830,8 +9830,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj": {
-              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj"
+            "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj": {
+              "projectPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj"
             }
           }
         }

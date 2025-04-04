@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Email;
 using Youth_Innovation_System.Shared.ApiResponses;
-using Youth_Innovation_System.Shared.DTOs;
+using Youth_Innovation_System.Shared.DTOs.Email;
 
 namespace Youth_Innovation_System.Controllers
 {

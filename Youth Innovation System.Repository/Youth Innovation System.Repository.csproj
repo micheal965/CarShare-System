@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Youth Innovation System.Core\Youth Innovation System.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

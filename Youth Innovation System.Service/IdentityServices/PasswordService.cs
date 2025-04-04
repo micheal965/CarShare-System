@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Youth_Innovation_System.Core.Entities.Identity;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Identity;
 using Youth_Innovation_System.Shared.ApiResponses;
 using Youth_Innovation_System.Shared.DTOs.Identity;
 

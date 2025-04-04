@@ -62,3 +62,19 @@ C:\Users\MICHEAL\OneDrive\Desktop\Youth-Innovation-System\Youth Innovation Syste
 C:\Users\MICHEAL\OneDrive\Desktop\Youth-Innovation-System\Youth Innovation System.Core\obj\Debug\net8.0\refint\Youth Innovation System.Core.dll
 C:\Users\MICHEAL\OneDrive\Desktop\Youth-Innovation-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.pdb
 C:\Users\MICHEAL\OneDrive\Desktop\Youth-Innovation-System\Youth Innovation System.Core\obj\Debug\net8.0\ref\Youth Innovation System.Core.dll
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.csproj.AssemblyReference.cache
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.AssemblyInfoInputs.cache
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.AssemblyInfo.cs
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.csproj.CoreCompileInputs.cache
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.sourcelink.json
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.dll
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\refint\Youth Innovation System.Core.dll
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth Innovation System.Core.pdb
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\bin\Debug\net8.0\Youth Innovation System.Core.deps.json
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\bin\Debug\net8.0\Youth Innovation System.Core.dll
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\bin\Debug\net8.0\Youth Innovation System.Core.pdb
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\bin\Debug\net8.0\Youth Innovation System.Shared.dll
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\bin\Debug\net8.0\Youth Innovation System.Shared.pdb
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\Youth In.474112B0.Up2Date
+C:\Users\MICHEAL\OneDrive\Desktop\CarShare\Car-Rental-System\Youth Innovation System.Core\obj\Debug\net8.0\ref\Youth Innovation System.Core.dll

@@ -6,7 +6,9 @@ namespace Youth_Innovation_System.Core.Roles
     {
         [EnumMember(Value = "Admin")]
         Admin,
-        [EnumMember(Value = "User")]
-        User
+        [EnumMember(Value = "CarOwner")]
+        CarOwner,
+        [EnumMember(Value = "Renter")]
+        Renter
     }
 }

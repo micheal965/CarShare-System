@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Youth Innovation System.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Youth Innovation System.Shared", "Youth Innovation System.Shared\Youth Innovation System.Shared.csproj", "{279F477D-5DD3-433C-85F1-FA79F48973A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Youth Innovation System.UnitTesting", "Youth Innovation System.UnitTesting\Youth Innovation System.UnitTesting.csproj", "{E4E74680-7F65-47FA-8D7C-8AFF1D019DD1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{279F477D-5DD3-433C-85F1-FA79F48973A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279F477D-5DD3-433C-85F1-FA79F48973A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{279F477D-5DD3-433C-85F1-FA79F48973A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4E74680-7F65-47FA-8D7C-8AFF1D019DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4E74680-7F65-47FA-8D7C-8AFF1D019DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4E74680-7F65-47FA-8D7C-8AFF1D019DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4E74680-7F65-47FA-8D7C-8AFF1D019DD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

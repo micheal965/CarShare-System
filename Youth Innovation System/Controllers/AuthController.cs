@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Identity;
+using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.DTOs.Identity;
 using Youth_Innovation_System.Shared.ApiResponses;
 using Youth_Innovation_System.Shared.DTOs.Identity;
+using Youth_Innovation_System.Shared.Exceptions;
 
 namespace Youth_Innovation_System.API.Controllers
 {
@@ -99,12 +101,27 @@ namespace Youth_Innovation_System.API.Controllers
             await _authService.BlacklistTokenAsync(token);
             return Ok(new ApiResponse(StatusCodes.Status200OK, "Logged out successfully"));
         }
-        [HttpGet("Confirm-Email")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        [Authorize(Roles = nameof(UserRoles.Admin))]
+        [HttpPut("Approve-Account")]
+        public async Task<IActionResult> ApproveAccount(string userId, bool IsApproved)
         {
-            // Confirm the user's email
-            var result = await _authService.ConfirmEmailAsync(userId, token);
-            return StatusCode(result.StatusCode, result);
+            try
+            {
+                await _authService.ManageCarOwnerAccount(userId, IsApproved);
+                return Ok(new ApiResponse(StatusCodes.Status200OK, "Account approved successfully"));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ApiResponse(StatusCodes.Status401Unauthorized, ex.Message));
+            }
+            catch (Exception ex) when (ex is InvalidOperationException || ex is Exception)
+            {
+                return BadRequest(new ApiResponse(StatusCodes.Status400BadRequest, ex.Message));
+            }
         }
         [HttpPost("Request-Reset-password")]
         public async Task<IActionResult> RequestResetPassword([FromBody] ResetPasswordRequestDto request)

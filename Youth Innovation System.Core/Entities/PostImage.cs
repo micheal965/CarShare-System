@@ -10,6 +10,6 @@ namespace Youth_Innovation_System.Core.Entities
         [ForeignKey("post")]
         public int PostId { get; set; }
         //Navigation properties
-        public Post post { get; set; }
+        public CarPost post { get; set; }
     }
 }

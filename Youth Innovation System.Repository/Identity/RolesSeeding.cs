@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Youth_Innovation_System.Core.Roles;
 
 namespace Youth_Innovation_System.Repository.Identity
 {
@@ -15,7 +10,7 @@ namespace Youth_Innovation_System.Repository.Identity
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            string[] rolesData = { "Admin", "User", "Investor" };
+            string[] rolesData = { UserRoles.Admin.ToString(), UserRoles.CarOwner.ToString(), UserRoles.Renter.ToString() };
             foreach (var item in rolesData)
             {
                 if (!await roleManager.RoleExistsAsync(item))

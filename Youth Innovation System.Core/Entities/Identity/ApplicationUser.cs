@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Youth_Innovation_System.Core.Roles;
 
 namespace Youth_Innovation_System.Core.Entities.Identity
 {
@@ -10,5 +11,6 @@ namespace Youth_Innovation_System.Core.Entities.Identity
         //for tracking ip address for each login
         public List<UserLoginHistory> userLoginsHistory { get; set; }
         public List<RefreshToken> refreshTokens { get; set; }
+        public string status { get; set; } = UserStatus.pending.ToString();
     }
 }

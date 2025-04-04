@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+ZHZsLDqkG8=",
+  "dgSpecHash": "Y9c0LCgoPek=",
   "success": true,
-  "projectFilePath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Youth-Innovation-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj",
+  "projectFilePath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MICHEAL\\.nuget\\packages\\cloudinarydotnet\\1.27.4\\cloudinarydotnet.1.27.4.nupkg.sha512",
     "C:\\Users\\MICHEAL\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",

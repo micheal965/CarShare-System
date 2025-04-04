@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Youth_Innovation_System.Core.Entities;
 using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Core.IRepositories;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Cloudinary;
+using Youth_Innovation_System.Core.IServices.Post;
+using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.Core.Specifications.PostSpecifications;
 using Youth_Innovation_System.Shared.DTOs.Post;
 using Youth_Innovation_System.Shared.Exceptions;
@@ -34,17 +35,12 @@ namespace Youth_Innovation_System.Service.PostServices
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) throw new NotFoundException("User not found");
 
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
 
             using var transaction = await _unitOfWork.BeginTransactionAsync();
             try
             {
-                var newPost = new Post()
-                {
-                    UserId = userId,
-                    Title = createPostDto.Title,
-                    Content = createPostDto.Content,
-                };
+                var newPost = _mapper.Map<CarPost>(createPostDto);
 
                 await postRepo.AddAsync(newPost);
                 await _unitOfWork.CompleteAsync();//Save changes to get postId
@@ -76,11 +72,12 @@ namespace Youth_Innovation_System.Service.PostServices
 
         public async Task<bool> DeletePostAsync(int postId, string userId)
         {
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
+
+            //Car owner can't delete car post if it is rented.
             UpdateOrDeletePostSpecification spec = new UpdateOrDeletePostSpecification(postId, userId);
             var post = await postRepo.GetWithSpecAsync(spec);
             if (post == null) return false;
-
 
             bool DeletePhotosResult = false;
             if (post.postImages.Count > 0)
@@ -99,14 +96,13 @@ namespace Youth_Innovation_System.Service.PostServices
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) throw new NotFoundException("User not found.");
             //PostRepository
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
 
             UpdateOrDeletePostSpecification spec = new UpdateOrDeletePostSpecification(updatePostDto.Id, userId);
             var post = await postRepo.GetWithSpecAsync(spec);
             if (post == null) throw new NotFoundException("There is no post to modify");
-            //update data manually instead of creating new instance with automapper(for performance)
-            post.Title = updatePostDto.Title ?? post.Title;
-            post.Content = updatePostDto.Content ?? post.Content;
+
+            post = _mapper.Map<CarPost>(updatePostDto);
 
             try
             {
@@ -141,26 +137,46 @@ namespace Youth_Innovation_System.Service.PostServices
         }
         public async Task<PagedResult<PostResponseDto>> GetAllPostsAsync(int pageNumber, int pageSize)
         {
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
             //Specification for pagination
             GetAllPostsSpecification specForPagination = new GetAllPostsSpecification(pageNumber, pageSize);
             var posts = await postRepo.GetAllWithSpecAsync(specForPagination);
             if (posts.Count == 0) throw new NotFoundException("There are no posts");
 
             //Specification for total count
-            GetAllPostsSpecification specForTotalCount = new GetAllPostsSpecification(pageNumber, pageSize);
-            var totalPosts = await _unitOfWork.Repository<Post>().CountAsyncWithSpec(specForTotalCount);
+            GetAllPostsSpecification specForTotalCount = new GetAllPostsSpecification();
+            var totalPosts = await postRepo.CountAsyncWithSpec(specForTotalCount);
 
             var mappedPosts = _mapper.Map<List<PostResponseDto>>(posts);
 
             return new PagedResult<PostResponseDto>(mappedPosts, totalPosts, pageSize);
+        }
+        public async Task<PagedResult<PostResponseDto>> GetPostsAfterSearchAsync(CarPostSearchParamaters searchParamaters)
+        {
+            var postRepo = _unitOfWork.Repository<CarPost>();
+            //Specification for Search
+            PostSearchSpecification specForSearch = new PostSearchSpecification(searchParamaters.CarType,
+                                                                                searchParamaters.RentalPrice,
+                                                                                searchParamaters.pageNumber,
+                                                                                searchParamaters.PageSize);
+
+            var posts = await postRepo.GetAllWithSpecAsync(specForSearch);
+            if (posts.Count == 0) throw new NotFoundException("There are no posts");
+
+            var searchedPosts = _mapper.Map<List<PostResponseDto>>(posts);
+            //Specification for total count
+            PostSearchSpecification specForTotalCount = new PostSearchSpecification(searchParamaters.CarType,
+                                                                                searchParamaters.RentalPrice);
+
+            var totalCount = await postRepo.CountAsyncWithSpec(specForTotalCount);
+            return new PagedResult<PostResponseDto>(searchedPosts, totalCount, searchParamaters.PageSize);
         }
         public async Task<PagedResult<PostResponseDto>> GetAllUserPostsAsync(string userId, int pageNumber, int pageSize)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) throw new NotFoundException("User not found.");
 
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
             //for Pagination
             GetAllUserPosts specWithPagination = new GetAllUserPosts(userId, pageNumber, pageSize);
             var posts = await postRepo.GetAllWithSpecAsync(specWithPagination);
@@ -174,7 +190,7 @@ namespace Youth_Innovation_System.Service.PostServices
         }
         public async Task<PostResponseDto> GetPostAsync(int postId)
         {
-            var postRepo = _unitOfWork.Repository<Post>();
+            var postRepo = _unitOfWork.Repository<CarPost>();
 
             //specifications of Get post (including postimages)
             GetPostSpecification spec = new GetPostSpecification(postId);
@@ -184,5 +200,19 @@ namespace Youth_Innovation_System.Service.PostServices
 
             return _mapper.Map<PostResponseDto>(post);
         }
+
+        public async Task ManagePostAsync(int postId, bool IsAccepted)
+        {
+            var postRepo = _unitOfWork.Repository<CarPost>();
+
+            var post = await postRepo.GetAsync(postId);
+            if (post == null)
+                throw new NotFoundException("Post not found.");
+            post.RentalStatus = IsAccepted ? CarStatus.Accepted.ToString() :
+                                             CarStatus.Rejected.ToString();
+            postRepo.Update(post);
+            await _unitOfWork.CompleteAsync();
+        }
+
     }
 }

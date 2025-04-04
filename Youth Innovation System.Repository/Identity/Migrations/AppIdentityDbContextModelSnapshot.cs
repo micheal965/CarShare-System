@@ -218,8 +218,9 @@ namespace Youth_Innovation_System.Repository.Identity.Migrations
                     b.Property<string>("pictureUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

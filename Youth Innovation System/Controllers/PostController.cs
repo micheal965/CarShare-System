@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Post;
 using Youth_Innovation_System.Core.Roles;
+using Youth_Innovation_System.Core.Specifications.PostSpecifications;
 using Youth_Innovation_System.Shared.ApiResponses;
 using Youth_Innovation_System.Shared.DTOs.Post;
 using Youth_Innovation_System.Shared.Exceptions;
@@ -20,7 +21,7 @@ namespace Youth_Innovation_System.Controllers
             _postService = postService;
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(UserRoles.CarOwner))]
         [HttpPost("Create-Post")]
         public async Task<IActionResult> CreatePost(CreatePostDto createPostDto)
         {
@@ -39,7 +40,8 @@ namespace Youth_Innovation_System.Controllers
                 return BadRequest(new ApiResponse(StatusCodes.Status400BadRequest, ex.Message));
             }
         }
-        [Authorize]
+        //if its rented so cant delete it
+        [Authorize(Roles = nameof(UserRoles.CarOwner))]
         [HttpDelete("Delete-Post/{postId}")]
         public async Task<IActionResult> DeletePost(int postId)
         {
@@ -51,20 +53,8 @@ namespace Youth_Innovation_System.Controllers
 
             return Ok(new ApiResponse(StatusCodes.Status200OK, "Post deleted successfully"));
         }
-        [HttpGet("Get-Post/{postId}")]
-        public async Task<IActionResult> GetPost(int postId)
-        {
-            try
-            {
-                return Ok(await _postService.GetPostAsync(postId));
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
-            }
 
-        }
-        [Authorize]
+        [Authorize(Roles = nameof(UserRoles.CarOwner))]
         [HttpPut("Update-Post")]
         public async Task<IActionResult> UpdatePost(UpdatePostDto updatePostDto)
         {
@@ -84,6 +74,19 @@ namespace Youth_Innovation_System.Controllers
             }
 
         }
+        [HttpGet("Get-Post/{postId}")]
+        public async Task<IActionResult> GetPost(int postId)
+        {
+            try
+            {
+                return Ok(await _postService.GetPostAsync(postId));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+
+        }
         [HttpGet("Get-User-Posts")]
         public async Task<IActionResult> GetUserPosts(GetUserPostsDto getUserPostsDto)
         {
@@ -99,7 +102,6 @@ namespace Youth_Innovation_System.Controllers
                 return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
             }
         }
-        [Authorize(Roles = nameof(UserRoles.Admin))]
         [HttpGet("Get-All-Posts")]
         public async Task<IActionResult> GetAllPosts(GetAllPostsDto getAllPostsDto)
         {
@@ -114,6 +116,40 @@ namespace Youth_Innovation_System.Controllers
                 return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
             }
         }
+        [HttpGet("Search-For-Cars")]
+        public async Task<IActionResult> SearchForCars([FromQuery] CarPostSearchParamaters searchParamaters)
+        {
+            try
+            {
+                var SearchedPosts = await _postService.GetPostsAfterSearchAsync(searchParamaters);
+                return Ok(SearchedPosts);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+        [Authorize(Roles = nameof(UserRoles.Admin))]
+        [HttpPost("Manage-Post/{postId}")]
+        public async Task<IActionResult> ManagePost(ManagePostDto managePostDto)
+        {
+            try
+            {
+                await _postService.ManagePostAsync(managePostDto.postId, managePostDto.IsAccepted);
+                return Ok(new ApiResponse(StatusCodes.Status200OK, "Post managed successfully"));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+        //[Authorize]
+        //[HttpGet("Get-Feedbacks/{postId}")]
+        //public async Task<IActionResult> GetFeedbacks(int postId)
+        //{
+        //    var result = await _rentalApplicationService.GetFeedbacksAsync(postId);
+        //    return StatusCode(result.StatusCode, result);
 
+        //}
     }
 }

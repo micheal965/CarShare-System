@@ -1,7 +1,6 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,11 +9,12 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Youth_Innovation_System.Core.Entities.Identity;
-using Youth_Innovation_System.Core.IServices;
+using Youth_Innovation_System.Core.IServices.Cloudinary;
+using Youth_Innovation_System.Core.IServices.Identity;
 using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.DTOs.Identity;
-using Youth_Innovation_System.Shared.ApiResponses;
 using Youth_Innovation_System.Shared.DTOs.Identity;
+using Youth_Innovation_System.Shared.Exceptions;
 
 namespace Youth_Innovation_System.Service.IdentityServices
 {
@@ -48,16 +48,16 @@ namespace Youth_Innovation_System.Service.IdentityServices
             //Ensuring user exist by email
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
-            {
                 throw new UnauthorizedAccessException("Invalid login attempt!");
-            }
+
+            if (user.status != UserStatus.accepted.ToString())
+                throw new UnauthorizedAccessException("Your account has not been approved yet or has been rejected.");
+
             //checking password
             //assume no lockout
             var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.IsPersistent, false);
             if (!result.Succeeded)
                 throw new UnauthorizedAccessException("Invalid login attempt!");
-            if (!user.EmailConfirmed)
-                throw new UnauthorizedAccessException("Email is not confirmed. Please verify your email first.");
 
             //track ipAddress in userloginhistory table
             await _userService.SaveLoginAttemptAsync(loginDto.Email);
@@ -79,9 +79,10 @@ namespace Youth_Innovation_System.Service.IdentityServices
 
             }
 
-            //set refresh token if not empty in the cookies 
+            //set refresh token in the cookies 
             if (!string.IsNullOrEmpty(RefreshTokenObj.token))
                 AppendRefreshTokenInCookies(RefreshTokenObj.token, RefreshTokenObj.expiryDate);
+
             return new LoginResponseDto()
             {
                 Id = user.Id,
@@ -102,7 +103,6 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 try
                 {
                     imageUploadResult = await _cloudinaryServices.UploadImageAsync(registerDto.ProfilePicture);
-
                 }
                 catch (Exception ex)
                 {
@@ -124,12 +124,24 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 throw new Exception($"Email {registerDto.Email} is already taken!");
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            var addRoleresult = await _userManager.AddToRoleAsync(user, UserRoles.User.ToString());
+            //Adding role
+            string role = string.Empty;
+            switch (registerDto.role)
+            {
+                case 0:
+                    role = UserRoles.CarOwner.ToString();
+                    break;
+                case 1:
+                    role = UserRoles.Renter.ToString();
+                    break;
+                default:
+                    throw new ArgumentException("Invalid role value");
+            }
+            var addRoleresult = await _userManager.AddToRoleAsync(user, role);
             if (!result.Succeeded)
                 throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
             if (!addRoleresult.Succeeded)
                 throw new Exception(string.Join(", ", addRoleresult.Errors.Select(e => e.Description)));
-
             return result;
         }
         public async Task<string> CreateJwtWebTokenAsync(ApplicationUser user)
@@ -188,22 +200,6 @@ namespace Youth_Innovation_System.Service.IdentityServices
         private void DeleteRefreshTokenFromCookies()
         {
             _httpContextAccessor.HttpContext.Response.Cookies.Delete("refreshToken");
-        }
-        //confirm email in db
-        public async Task<ApiResponse> ConfirmEmailAsync(string userId, string token)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-                return new ApiResponse(StatusCodes.Status400BadRequest, "Invalid Email");
-            // Confirm the user's email
-            var decodedToken = WebEncoders.Base64UrlDecode(token);
-            var normalToken = Encoding.UTF8.GetString(decodedToken);
-            var result = await _userManager.ConfirmEmailAsync(user, normalToken);
-
-            if (!result.Succeeded)
-                return new ApiResponse(StatusCodes.Status400BadRequest, "Invalid or expired token.");
-
-            return new ApiResponse(StatusCodes.Status200OK, "Email Verified Successfully");
         }
         private RefreshToken GenerateRefreshTokenObject()
         {
@@ -276,5 +272,24 @@ namespace Youth_Innovation_System.Service.IdentityServices
             return true;
         }
 
+        public async Task ManageCarOwnerAccount(string userId, bool IsApproved)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+                throw new NotFoundException("User not found.");
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (!roles.Contains(UserRoles.CarOwner.ToString()))
+                throw new UnauthorizedAccessException("Only Car Owner accounts can be managed.");
+
+            if (user.status == UserStatus.accepted.ToString())
+                throw new InvalidOperationException("Accepted accounts cannot be modified.");
+
+            user.status = IsApproved ? UserStatus.accepted.ToString() : UserStatus.rejected.ToString();
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+                throw new Exception("Failed to update user status.");
+        }
     }
 }
