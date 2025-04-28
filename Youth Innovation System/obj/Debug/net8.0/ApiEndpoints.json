@@ -2,22 +2,27 @@
   {
     "ContainingType": "Youth_Innovation_System.API.Controllers.AuthController",
     "Method": "ApproveAccount",
-    "RelativePath": "api/Auth/Approve-Account",
+    "RelativePath": "api/Auth/Approve-Or-Reject-Account",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "IsApproved",
-        "Type": "System.Boolean",
-        "IsRequired": false
+        "Name": "approveAccountDto",
+        "Type": "Youth_Innovation_System.Shared.DTOs.Identity.Roles.ApproveAccountDto",
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.API.Controllers.AuthController",
+    "Method": "GetPendingAndRejectedAccounts",
+    "RelativePath": "api/Auth/Get-Pending-And-Rejected-Accounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

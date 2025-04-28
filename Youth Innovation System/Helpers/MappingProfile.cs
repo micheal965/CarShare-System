@@ -23,6 +23,11 @@ namespace Youth_Innovation_System.Helpers
 
             CreateMap<UpdatePostDto, CarPost>();
             CreateMap<CreatePostDto, CarPost>();
+
+
+            CreateMap<ApplicationUser, AccountResponseDto>()
+                .ForMember(dest => dest.profilePicture,
+                opt => opt.MapFrom(src => src.pictureUrl));
         }
     }
 }

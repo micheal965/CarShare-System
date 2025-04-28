@@ -1,14 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\",
+  "WorkspaceRootPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\carshare\\car-rental-system\\youth innovation system\\controllers\\rentalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|solutionrelative:youth innovation system\\controllers\\rentalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|solutionrelative:youth innovation system\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\carshare\\car-rental-system\\youth innovation system.service\\rentalservices\\rentalapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\rentalservices\\rentalapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{279F477D-5DD3-433C-85F1-FA79F48973A8}|Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.shared\\dtos\\identity\\accountresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279F477D-5DD3-433C-85F1-FA79F48973A8}|Youth Innovation System.Shared\\Youth Innovation System.Shared.csproj|solutionrelative:youth innovation system.shared\\dtos\\identity\\accountresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system\\extensions\\migrate_seedingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|solutionrelative:youth innovation system\\extensions\\migrate_seedingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,8 +25,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 14,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 11,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,34 +42,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RentalController.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\RentalController.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System\\Controllers\\RentalController.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\RentalController.cs",
-              "RelativeToolTip": "Youth Innovation System\\Controllers\\RentalController.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAuwDsAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AccountResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Shared\\DTOs\\Identity\\AccountResponseDto.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System.Shared\\DTOs\\Identity\\AccountResponseDto.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Shared\\DTOs\\Identity\\AccountResponseDto.cs",
+              "RelativeToolTip": "Youth Innovation System.Shared\\DTOs\\Identity\\AccountResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T16:56:09.106Z",
+              "WhenOpened": "2025-04-28T07:11:17.394Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 14,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RentalApplicationService.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\RentalServices\\RentalApplicationService.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System.Service\\RentalServices\\RentalApplicationService.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\RentalServices\\RentalApplicationService.cs",
-              "RelativeToolTip": "Youth Innovation System.Service\\RentalServices\\RentalApplicationService.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Migrate_SeedingData.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "RelativeToolTip": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB8AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T16:58:35.433Z",
+              "WhenOpened": "2025-04-27T12:51:02.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "RelativeToolTip": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAA5wDIBAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T12:43:49.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Youth Innovation System\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAQwGgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T11:35:37.818Z",
               "EditorCaption": ""
             }
           ]

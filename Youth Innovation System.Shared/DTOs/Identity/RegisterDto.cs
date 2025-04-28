@@ -29,7 +29,7 @@ namespace Youth_Innovation_System.Shared.DTOs.Identity
         [Required(ErrorMessage = "PhoneNumber is required")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }  // User's phone number
-        public IFormFile ProfilePicture { get; set; }  // Profile picture
+        public IFormFile? ProfilePicture { get; set; }  // Profile picture
         public int role { get; set; }
     }
 }

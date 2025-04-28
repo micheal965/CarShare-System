@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using Youth_Innovation_System.Core.Entities;
 
 namespace Youth_Innovation_System.Core.Specifications
 {
-    public interface ISpecification<T> where T : BaseEntity
+    public interface ISpecification<T> where T : class
     {
         //Filteration
         Expression<Func<T, bool>> Criteria { get; set; }

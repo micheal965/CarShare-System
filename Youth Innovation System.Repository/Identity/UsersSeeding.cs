@@ -18,7 +18,7 @@ namespace Youth_Innovation_System.Repository.Identity
                     Email = "michealghobriall@gmail.com",
                     UserName = "Micheal.Ghobrial",
                     PhoneNumber = "01201605049",
-                    EmailConfirmed = true,
+                    status = UserStatus.accepted.ToString()
                 };
                 await userManager.CreateAsync(user, "P@$$w0rd");
                 await userManager.AddToRoleAsync(user, UserRoles.Admin.ToString());

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Youth_Innovation_System.Core.IServices.Identity;
+using Youth_Innovation_System.Core.IServices.IdentityServices;
 using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.DTOs.Identity;
 using Youth_Innovation_System.Shared.ApiResponses;
 using Youth_Innovation_System.Shared.DTOs.Identity;
+using Youth_Innovation_System.Shared.DTOs.Identity.Roles;
 using Youth_Innovation_System.Shared.Exceptions;
 
 namespace Youth_Innovation_System.API.Controllers
@@ -34,9 +36,8 @@ namespace Youth_Innovation_System.API.Controllers
             {
                 try
                 {
-                    //Send Verification Email
-                    await _userVerificationService.RequestVerificationEmailAsync(registerDto.Email);
-                    return Ok(new ApiResponse(StatusCodes.Status200OK, "Registration successful! Please check your email for a verification link to activate your account."));
+                    return Ok(new ApiResponse(StatusCodes.Status200OK, "Registration successful! Please wait for the Admin to verify your account."));
+
                 }
                 catch (Exception ex)
                 {
@@ -102,13 +103,22 @@ namespace Youth_Innovation_System.API.Controllers
             return Ok(new ApiResponse(StatusCodes.Status200OK, "Logged out successfully"));
         }
         [Authorize(Roles = nameof(UserRoles.Admin))]
-        [HttpPut("Approve-Account")]
-        public async Task<IActionResult> ApproveAccount(string userId, bool IsApproved)
+        [HttpGet("Get-Pending-And-Rejected-Accounts")]
+        public async Task<IActionResult> GetPendingAndRejectedAccounts()
+          => Ok(await _authService.GetPendingAndRejectedAccountsAsync());
+
+
+        [Authorize(Roles = nameof(UserRoles.Admin))]
+        [HttpPut("Approve-Or-Reject-Account")]
+        public async Task<IActionResult> ApproveAccount(ApproveAccountDto approveAccountDto)
         {
             try
             {
-                await _authService.ManageCarOwnerAccount(userId, IsApproved);
-                return Ok(new ApiResponse(StatusCodes.Status200OK, "Account approved successfully"));
+                await _authService.ManageCarOwnerAccount(approveAccountDto.userId, approveAccountDto.IsApproved);
+                string message = approveAccountDto.IsApproved
+                    ? "Account approved successfully"
+                    : "Account rejected successfully";
+                return Ok(new ApiResponse(StatusCodes.Status200OK, message));
             }
             catch (NotFoundException ex)
             {

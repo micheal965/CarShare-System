@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jH36Hmu9aDY=",
+  "dgSpecHash": "lmvYNzAQbqk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj",
+  "projectFilePath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\Youth Innovation System.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MICHEAL\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\MICHEAL\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

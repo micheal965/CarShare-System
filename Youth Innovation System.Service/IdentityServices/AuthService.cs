@@ -1,4 +1,5 @@
-﻿using CloudinaryDotNet.Actions;
+﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Core.IServices.Cloudinary;
 using Youth_Innovation_System.Core.IServices.Identity;
 using Youth_Innovation_System.Core.Roles;
+using Youth_Innovation_System.Core.Specifications.AuthSpecifications;
 using Youth_Innovation_System.DTOs.Identity;
 using Youth_Innovation_System.Shared.DTOs.Identity;
 using Youth_Innovation_System.Shared.Exceptions;
@@ -28,12 +30,15 @@ namespace Youth_Innovation_System.Service.IdentityServices
         private readonly ICloudinaryServices _cloudinaryServices;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IMapper _mapper;
+
         public AuthService(IConfiguration configuration,
                            IUserService userService,
                            IHttpContextAccessor httpContextAccessor,
                            ICloudinaryServices cloudinaryServices,
                            UserManager<ApplicationUser> userManager,
-                           SignInManager<ApplicationUser> signInManager)
+                           SignInManager<ApplicationUser> signInManager,
+                           IMapper mapper)
         {
             _configuration = configuration;
             _userService = userService;
@@ -41,6 +46,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
             _cloudinaryServices = cloudinaryServices;
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         public async Task<LoginResponseDto> LoginAsync(LoginDto loginDto)
@@ -91,11 +97,15 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 Token = await CreateJwtWebTokenAsync(user),
                 Roles = roles.ToList(),
                 refreshToken = RefreshTokenObj.token,
-                refreshTokenExpiration = RefreshTokenObj.expiryDate,
+                profilePicture = user.pictureUrl
             };
         }
         public async Task<IdentityResult> RegisterAsync(RegisterDto registerDto)
         {
+
+            //ensuring email doesn't exist before
+            if (await _userManager.FindByEmailAsync(registerDto.Email) != null)
+                throw new Exception($"Email {registerDto.Email} is already taken!");
 
             ImageUploadResult imageUploadResult = null;
             if (registerDto.ProfilePicture != null)
@@ -119,11 +129,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 PhoneNumber = registerDto.PhoneNumber,
                 pictureUrl = imageUploadResult?.SecureUri.ToString(),
             };
-            //ensuring email doesn't exist before
-            if (await _userManager.FindByEmailAsync(registerDto.Email) != null)
-                throw new Exception($"Email {registerDto.Email} is already taken!");
 
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
             //Adding role
             string role = string.Empty;
             switch (registerDto.role)
@@ -133,10 +139,13 @@ namespace Youth_Innovation_System.Service.IdentityServices
                     break;
                 case 1:
                     role = UserRoles.Renter.ToString();
+                    user.status = UserStatus.accepted.ToString();
                     break;
                 default:
                     throw new ArgumentException("Invalid role value");
             }
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
             var addRoleresult = await _userManager.AddToRoleAsync(user, role);
             if (!result.Succeeded)
                 throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
@@ -290,6 +299,13 @@ namespace Youth_Innovation_System.Service.IdentityServices
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
                 throw new Exception("Failed to update user status.");
+        }
+
+        public async Task<IReadOnlyList<AccountResponseDto>> GetPendingAndRejectedAccountsAsync()
+        {
+            GetPendingAndRejectedAccountsSpecifications spec = new GetPendingAndRejectedAccountsSpecifications();
+            var Users = await _userManager.Users.Where(spec.Criteria).ToListAsync();
+            return _mapper.Map<IReadOnlyList<AccountResponseDto>>(Users);
         }
     }
 }
