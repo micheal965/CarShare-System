@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using StackExchange.Redis;
 using Youth_Innovation_System.API.Middlewares;
 using Youth_Innovation_System.Extensions;
 using Youth_Innovation_System.Middlewares;
 using Youth_Innovation_System.Repository.Data;
 using Youth_Innovation_System.Repository.Identity;
+using Youth_Innovation_System.Service.Hubs;
 namespace Youth_Innovation_System
 {
     public class Program
@@ -29,7 +29,7 @@ namespace Youth_Innovation_System
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             //Redis
-            builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
+            //builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
 
             //add identityservices
             await builder.Services.AddIdentityServices(builder.Configuration);
@@ -68,7 +68,7 @@ namespace Youth_Innovation_System
             app.UseAuthorization();
 
             //app.MapHub<ChatHub>("/chathub").RequireAuthorization();
-
+            app.MapHub<NotificationHub>("/notificationHub");
             app.MapControllers();
             app.Run();
         }

@@ -88,13 +88,13 @@ namespace Youth_Innovation_System.Controllers
 
         }
         [HttpGet("Get-User-Posts")]
-        public async Task<IActionResult> GetUserPosts(GetUserPostsDto getUserPostsDto)
+        public async Task<IActionResult> GetUserPosts([FromQuery] GetUserPostsDto getUserPostsDto)
         {
             try
             {
                 var pagedPosts = await _postService.GetAllUserPostsAsync(getUserPostsDto.userId,
-                                                                       getUserPostsDto.pageNumber,
-                                                                       getUserPostsDto.pageSize);
+                                                                    getUserPostsDto.pageNumber,
+                                                                    getUserPostsDto.pageSize);
                 return Ok(pagedPosts);
             }
             catch (NotFoundException ex)
@@ -116,6 +116,7 @@ namespace Youth_Innovation_System.Controllers
                 return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
             }
         }
+
         [HttpGet("Search-For-Cars")]
         public async Task<IActionResult> SearchForCars([FromQuery] CarPostSearchParamaters searchParamaters)
         {
@@ -130,7 +131,22 @@ namespace Youth_Innovation_System.Controllers
             }
         }
         [Authorize(Roles = nameof(UserRoles.Admin))]
-        [HttpPost("Manage-Post/{postId}")]
+        [HttpGet("Get-Pending-Posts")]
+        public async Task<IActionResult> GetPendingPosts()
+        {
+            try
+            {
+                var result = await _postService.GetPendingPostsAsync();
+                return Ok(result);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+
+        [Authorize(Roles = nameof(UserRoles.Admin))]
+        [HttpPost("Manage-Post")]
         public async Task<IActionResult> ManagePost(ManagePostDto managePostDto)
         {
             try

@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Youth_Innovation_System.Core.IRedis;
 using Youth_Innovation_System.Core.IRepositories;
 using Youth_Innovation_System.Core.IServices.Cloudinary;
 using Youth_Innovation_System.Core.IServices.Email;
-using Youth_Innovation_System.Core.IServices.IChat;
 using Youth_Innovation_System.Core.IServices.Identity;
 using Youth_Innovation_System.Core.IServices.IdentityServices;
+using Youth_Innovation_System.Core.IServices.NotificationServices;
 using Youth_Innovation_System.Core.IServices.Post;
 using Youth_Innovation_System.Core.IServices.Rental;
 using Youth_Innovation_System.Helpers;
 using Youth_Innovation_System.Repository.Data;
-using Youth_Innovation_System.Repository.Redis;
-using Youth_Innovation_System.Service.ChatServices;
 using Youth_Innovation_System.Service.CloudinaryServices;
 using Youth_Innovation_System.Service.EmailService;
 using Youth_Innovation_System.Service.IdentityServices;
+using Youth_Innovation_System.Service.NotificationService;
 using Youth_Innovation_System.Service.PostServices;
 using Youth_Innovation_System.Service.RentalServices;
 using Youth_Innovation_System.Shared.ApiResponses;
@@ -42,13 +40,14 @@ namespace Youth_Innovation_System.Extensions
             Services.AddScoped<IPostService, PostService>();
             Services.AddScoped<ICloudinaryServices, CloudinaryServices>();
             Services.AddScoped<IRentalApplicationService, RentalApplicationService>();
-            Services.AddScoped<IChatService, ChatService>();
+            //Services.AddScoped<IChatService, ChatService>();
+            Services.AddScoped<INotificationService, NotificationService>();
             Services.AddSignalR();
 
             //Redis
-            Services.AddSingleton<IRedisHelper, RedisHelper>();
+            //Services.AddSingleton<IRedisHelper, RedisHelper>();
             //SignalR
-            Services.AddSingleton<IRedisConnectionManager, RedisConnectionManager>();
+            //Services.AddSingleton<IRedisConnectionManager, RedisConnectionManager>();
             Services.AddAutoMapper(typeof(MappingProfile));
 
             Services.Configure<ApiBehaviorOptions>(options =>

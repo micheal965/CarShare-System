@@ -229,6 +229,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Youth_Innovation_System.Controllers.NotificationController",
+    "Method": "GetAllNotifications",
+    "RelativePath": "api/Notification/Get-All-Notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.NotificationController",
+    "Method": "MarkNotificationAsRead",
+    "RelativePath": "api/Notification/Mark-Notification-As-Read/{NotifyId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NotifyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Youth_Innovation_System.Controllers.PostController",
     "Method": "CreatePost",
     "RelativePath": "api/Post/Create-Post",
@@ -273,11 +299,6 @@
       },
       {
         "Name": "Location",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "RentalStatus",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -338,6 +359,16 @@
   },
   {
     "ContainingType": "Youth_Innovation_System.Controllers.PostController",
+    "Method": "GetPendingPosts",
+    "RelativePath": "api/Post/Get-Pending-Posts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Youth_Innovation_System.Controllers.PostController",
     "Method": "GetPost",
     "RelativePath": "api/Post/Get-Post/{postId}",
     "HttpMethod": "GET",
@@ -361,9 +392,19 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "getUserPostsDto",
-        "Type": "Youth_Innovation_System.Shared.DTOs.Post.GetUserPostsDto",
-        "IsRequired": true
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -371,7 +412,7 @@
   {
     "ContainingType": "Youth_Innovation_System.Controllers.PostController",
     "Method": "ManagePost",
-    "RelativePath": "api/Post/Manage-Post/{postId}",
+    "RelativePath": "api/Post/Manage-Post",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -379,11 +420,6 @@
       {
         "Name": "managePostDto",
         "Type": "Youth_Innovation_System.Shared.DTOs.Post.ManagePostDto",
-        "IsRequired": true
-      },
-      {
-        "Name": "postId",
-        "Type": "",
         "IsRequired": true
       }
     ],

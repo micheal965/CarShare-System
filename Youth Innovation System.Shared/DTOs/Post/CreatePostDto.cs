@@ -30,9 +30,6 @@ namespace Youth_Innovation_System.Shared.DTOs.Post
         public string Location { get; set; }
 
         [Required]
-        public string RentalStatus { get; set; }
-
-        [Required]
         public DateTime AvailabilityStart { get; set; }
 
         [Required]

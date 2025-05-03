@@ -3,6 +3,7 @@ using Youth_Innovation_System.Core.Entities;
 using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Shared.DTOs.Identity;
 using Youth_Innovation_System.Shared.DTOs.Post;
+using Youth_Innovation_System.Shared.DTOs.Rental;
 
 namespace Youth_Innovation_System.Helpers
 {
@@ -28,6 +29,8 @@ namespace Youth_Innovation_System.Helpers
             CreateMap<ApplicationUser, AccountResponseDto>()
                 .ForMember(dest => dest.profilePicture,
                 opt => opt.MapFrom(src => src.pictureUrl));
+
+            CreateMap<RentalApplication, RentalApplicationDto>();
         }
     }
 }

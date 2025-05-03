@@ -4,6 +4,7 @@ using Youth_Innovation_System.Core.Entities;
 using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Core.IRepositories;
 using Youth_Innovation_System.Core.IServices.Cloudinary;
+using Youth_Innovation_System.Core.IServices.NotificationServices;
 using Youth_Innovation_System.Core.IServices.Post;
 using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.Core.Specifications.PostSpecifications;
@@ -18,17 +19,20 @@ namespace Youth_Innovation_System.Service.PostServices
         private readonly ICloudinaryServices _cloudinaryServices;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly INotificationService _notificationService;
         private readonly IUnitOfWork _unitOfWork;
 
         public PostService(IUnitOfWork unitOfWork,
                           ICloudinaryServices cloudinaryServices,
                           IMapper mapper,
-                          UserManager<ApplicationUser> userManager)
+                          UserManager<ApplicationUser> userManager,
+                          INotificationService notificationService)
         {
             _unitOfWork = unitOfWork;
             _cloudinaryServices = cloudinaryServices;
             _mapper = mapper;
             _userManager = userManager;
+            _notificationService = notificationService;
         }
         public async Task<PostResponseDto> CreatePostAsync(string userId, CreatePostDto createPostDto)
         {
@@ -41,6 +45,7 @@ namespace Youth_Innovation_System.Service.PostServices
             try
             {
                 var newPost = _mapper.Map<CarPost>(createPostDto);
+                newPost.OwnerId = userId;
 
                 await postRepo.AddAsync(newPost);
                 await _unitOfWork.CompleteAsync();//Save changes to get postId
@@ -61,6 +66,8 @@ namespace Youth_Innovation_System.Service.PostServices
                     await _unitOfWork.CompleteAsync();
                 }
                 await transaction.CommitAsync();
+                var message = $"{user.firstName} {user.lastName} has submitted a new post and is awaiting approval.";
+                await _notificationService.NotifyAsync(userId, message);
                 return _mapper.Map<PostResponseDto>(newPost);
             }
             catch (Exception ex)
@@ -212,6 +219,15 @@ namespace Youth_Innovation_System.Service.PostServices
                                              CarStatus.Rejected.ToString();
             postRepo.Update(post);
             await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task<IReadOnlyList<PostResponseDto>> GetPendingPostsAsync()
+        {
+            GetPendingPostsSpecifications spec = new GetPendingPostsSpecifications();
+
+            var Posts = await _unitOfWork.Repository<CarPost>().GetAllWithSpecAsync(spec);
+
+            return _mapper.Map<IReadOnlyList<PostResponseDto>>(Posts);
         }
 
     }

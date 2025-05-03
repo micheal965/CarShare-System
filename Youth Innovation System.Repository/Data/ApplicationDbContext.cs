@@ -12,6 +12,7 @@ namespace Youth_Innovation_System.Repository.Data
         public DbSet<PostImage> PostImages { get; set; }
         public DbSet<RentalApplication> RentalApplications { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

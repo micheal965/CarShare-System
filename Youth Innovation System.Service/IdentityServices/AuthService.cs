@@ -12,6 +12,7 @@ using System.Text;
 using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Core.IServices.Cloudinary;
 using Youth_Innovation_System.Core.IServices.Identity;
+using Youth_Innovation_System.Core.IServices.NotificationServices;
 using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.Core.Specifications.AuthSpecifications;
 using Youth_Innovation_System.DTOs.Identity;
@@ -31,6 +32,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
         public AuthService(IConfiguration configuration,
                            IUserService userService,
@@ -38,7 +40,9 @@ namespace Youth_Innovation_System.Service.IdentityServices
                            ICloudinaryServices cloudinaryServices,
                            UserManager<ApplicationUser> userManager,
                            SignInManager<ApplicationUser> signInManager,
-                           IMapper mapper)
+                           IMapper mapper,
+                           INotificationService notificationService
+                          )
         {
             _configuration = configuration;
             _userService = userService;
@@ -47,6 +51,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         public async Task<LoginResponseDto> LoginAsync(LoginDto loginDto)
@@ -151,6 +156,10 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
             if (!addRoleresult.Succeeded)
                 throw new Exception(string.Join(", ", addRoleresult.Errors.Select(e => e.Description)));
+
+
+            string message = $"{user.firstName} {user.lastName} has registered and is awaiting your approval to log in.";
+            await _notificationService.NotifyAsync(user.Id, message);
             return result;
         }
         public async Task<string> CreateJwtWebTokenAsync(ApplicationUser user)
@@ -244,6 +253,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
             var refreshToken = user.refreshTokens.Single(rt => rt.token == token);
             if (!refreshToken.isActive)
                 return new RotateRefreshTokenResponseDto() { Message = "InActive Token" };
+
             //revoke that token and generate new one
             refreshToken.revokedOn = DateTime.UtcNow;
 
