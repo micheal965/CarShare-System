@@ -442,7 +442,7 @@ export default function MiniDrawer() {
 							/>
 						</ListItemButton>
 					</ListItem>
-					{user.userRole !== undefined && user?.userRole === "owner" && (
+					{user?.userRole !== "owner" ? null : (
 						<ListItem
 							key={"Posts"}
 							component="a"
@@ -504,7 +504,7 @@ export default function MiniDrawer() {
 							</ListItemButton>
 						</ListItem>
 					)}
-					{user.userRole !== undefined && user?.userRole === "owner" && (
+					{user?.userRole !== "owner" ? null :  (
 						<ListItem
 							key={"Proposals"}
 							component="a"
