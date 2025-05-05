@@ -39,9 +39,9 @@ namespace Youth_Innovation_System
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder =>
+                options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.WithOrigins("https://localhost:7203")
+                    builder.WithOrigins("http://localhost:5173") // exact origin from error message
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials();
@@ -61,7 +61,7 @@ namespace Youth_Innovation_System
                 app.UseSwaggerUI();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowAll");
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseAuthentication();

@@ -6,6 +6,7 @@ namespace Youth_Innovation_System.Shared.DTOs.Post
     public class UpdatePostDto
     {
         public int Id { get; set; }
+
         [MaxLength(100)]
         public string Title { get; set; }
 
@@ -23,8 +24,6 @@ namespace Youth_Innovation_System.Shared.DTOs.Post
         public string Transmission { get; set; }
 
         public string Location { get; set; }
-
-        public string RentalStatus { get; set; }
 
         public DateTime AvailabilityStart { get; set; }
 

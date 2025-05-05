@@ -640,13 +640,6 @@
             }
           },
           {
-            "name": "RentalStatus",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "AvailabilityStart",
             "in": "query",
             "schema": {

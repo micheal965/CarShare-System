@@ -88,10 +88,9 @@ namespace Youth_Innovation_System.Service.PostServices
 
             bool DeletePhotosResult = false;
             if (post.postImages.Count > 0)
-            {
                 DeletePhotosResult = await _cloudinaryServices.DeleteImagesAsync(post.postImages.Select(pi => pi.imageUrl).ToList());
-            }
-            if (DeletePhotosResult)
+
+            if (post.postImages.Count == 0 || DeletePhotosResult)
             {
                 postRepo.Delete(post);
                 if (await _unitOfWork.CompleteAsync() > 0) return true;
@@ -108,9 +107,7 @@ namespace Youth_Innovation_System.Service.PostServices
             UpdateOrDeletePostSpecification spec = new UpdateOrDeletePostSpecification(updatePostDto.Id, userId);
             var post = await postRepo.GetWithSpecAsync(spec);
             if (post == null) throw new NotFoundException("There is no post to modify");
-
-            post = _mapper.Map<CarPost>(updatePostDto);
-
+            post = _mapper.Map(updatePostDto, post);
             try
             {
                 //Ensuring there are new images
@@ -153,9 +150,7 @@ namespace Youth_Innovation_System.Service.PostServices
             //Specification for total count
             GetAllPostsSpecification specForTotalCount = new GetAllPostsSpecification();
             var totalPosts = await postRepo.CountAsyncWithSpec(specForTotalCount);
-
             var mappedPosts = _mapper.Map<List<PostResponseDto>>(posts);
-
             return new PagedResult<PostResponseDto>(mappedPosts, totalPosts, pageSize);
         }
         public async Task<PagedResult<PostResponseDto>> GetPostsAfterSearchAsync(CarPostSearchParamaters searchParamaters)

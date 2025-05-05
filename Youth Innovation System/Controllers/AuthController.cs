@@ -43,7 +43,6 @@ namespace Youth_Innovation_System.API.Controllers
                 {
                     return BadRequest(new ApiResponse(StatusCodes.Status400BadRequest, "There is an error while sending verification email."));
                 }
-
             }
             return BadRequest(new ApiResponse(StatusCodes.Status400BadRequest, "There is an error, Please register again later!"));
 

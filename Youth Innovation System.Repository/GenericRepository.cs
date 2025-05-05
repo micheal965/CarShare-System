@@ -21,10 +21,10 @@ namespace Youth_Innovation_System.Repository
         public void Delete(T entity)
         => _dbContext.Set<T>().Remove(entity);
         public async Task<IReadOnlyList<T>> GetAllAsync()
-        => await _dbContext.Set<T>().ToListAsync();
+        => await _dbContext.Set<T>().AsNoTracking().ToListAsync();
 
         public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
-        => await GetQuery(spec).ToListAsync();
+        => await GetQuery(spec).AsNoTracking().ToListAsync();
         public async Task<int> CountAsyncWithSpec(ISpecification<T> spec)
         => await GetQuery(spec).CountAsync();
         public async Task<T?> GetAsync(int id)
@@ -34,8 +34,6 @@ namespace Youth_Innovation_System.Repository
 
         public void Update(T entity)
             => _dbContext.Set<T>().Update(entity);
-
-
         private IQueryable<T> GetQuery(ISpecification<T> spec)
           => SpecificationEvaluator<T>.BuildQuery(_dbContext.Set<T>(), spec);
     }

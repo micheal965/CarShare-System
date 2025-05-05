@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Youth Innovation System.Shared"
+    "\\Youth Innovation System",
+    "\\Youth Innovation System.Shared",
+    "\\Youth Innovation System\\Controllers"
   ],
-  "SelectedNode": "\\Youth Innovation System.Repository",
+  "SelectedNode": "\\Youth Innovation System\\Controllers\\RentalController.cs",
   "PreviewInSolutionExplorer": false
 }

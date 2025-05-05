@@ -450,7 +450,7 @@
       },
       {
         "Name": "RentalPrice",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -506,11 +506,6 @@
       },
       {
         "Name": "Location",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "RentalStatus",
         "Type": "System.String",
         "IsRequired": false
       },

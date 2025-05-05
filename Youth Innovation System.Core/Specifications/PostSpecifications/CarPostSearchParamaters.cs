@@ -12,7 +12,7 @@
             set { pagesize = value > MaxpageSize ? MaxpageSize : value; }
         }
 
-        public string CarType { get; set; } // Sedan, SUV, Truck, etc.
-        public decimal RentalPrice { get; set; }
+        public string? CarType { get; set; } // Sedan, SUV, Truck, etc.
+        public decimal? RentalPrice { get; set; }
     }
 }

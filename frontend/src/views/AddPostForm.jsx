@@ -53,7 +53,7 @@ export const AddPostForm = () => {
 		formData.append("Brand", brandRef.current.value);
 		formData.append("Model", modelRef.current.value);
 		formData.append("Year", yearRef.current.value);
-		formData.append("Transmission", transmission.current.value);
+		formData.append("Transmission", transmission);
 		formData.append("Location", locationRef.current.value);
 		formData.append("RentalPrice", priceRef.current.value);
 		formData.append("Images", titleRef.current.value);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Youth_Innovation_System.Core.IRepositories;
@@ -42,9 +43,11 @@ namespace Youth_Innovation_System.Extensions
             Services.AddScoped<IRentalApplicationService, RentalApplicationService>();
             //Services.AddScoped<IChatService, ChatService>();
             Services.AddScoped<INotificationService, NotificationService>();
+            var dataProtectionProvider = DataProtectionProvider.Create(
+                new DirectoryInfo(@"./keys"),
+                config => config.SetApplicationName("YouthInnovationSystem")
+            );
             Services.AddSignalR();
-
-            //Redis
             //Services.AddSingleton<IRedisHelper, RedisHelper>();
             //SignalR
             //Services.AddSingleton<IRedisConnectionManager, RedisConnectionManager>();

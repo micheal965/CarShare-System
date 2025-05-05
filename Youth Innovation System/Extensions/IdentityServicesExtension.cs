@@ -40,8 +40,8 @@ namespace Youth_Innovation_System.Extensions
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = Configuration["JwtSettings:Issuer"],
                         ValidAudience = Configuration["JwtSettings:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:Secret"]))
-
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:Secret"])),
+                        ClockSkew = TimeSpan.Zero
                     };
                     options.Events = new JwtBearerEvents
                     {

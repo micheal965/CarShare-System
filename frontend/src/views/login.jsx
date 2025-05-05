@@ -40,7 +40,7 @@ export default function Login() {
 				};
 
 				setUser(userData);
-				setToken(data.Token);
+				setToken(data.token);
 			})
 			.catch((err) => {
 				const response = err.response;
