@@ -14,7 +14,6 @@ using Youth_Innovation_System.Core.IServices.Cloudinary;
 using Youth_Innovation_System.Core.IServices.Identity;
 using Youth_Innovation_System.Core.IServices.NotificationServices;
 using Youth_Innovation_System.Core.Roles;
-using Youth_Innovation_System.Core.Specifications.AuthSpecifications;
 using Youth_Innovation_System.DTOs.Identity;
 using Youth_Innovation_System.Shared.DTOs.Identity;
 using Youth_Innovation_System.Shared.Exceptions;
@@ -320,9 +319,13 @@ namespace Youth_Innovation_System.Service.IdentityServices
 
         public async Task<IReadOnlyList<AccountResponseDto>> GetPendingAndRejectedAccountsAsync()
         {
-            GetPendingAndRejectedAccountsSpecifications spec = new GetPendingAndRejectedAccountsSpecifications();
-            var Users = await _userManager.Users.Where(spec.Criteria).ToListAsync();
-            return _mapper.Map<IReadOnlyList<AccountResponseDto>>(Users);
+            //GetPendingAndRejectedAccountsSpecifications spec = new GetPendingAndRejectedAccountsSpecifications();
+
+            //users in carowner role
+            var Users = await _userManager.GetUsersInRoleAsync(UserRoles.CarOwner.ToString());
+            //pendingorrejected
+            var PendingOrRejectedUsers = Users.Where(u => u.status == UserStatus.pending.ToString() || u.status == UserStatus.rejected.ToString()).ToList();
+            return _mapper.Map<IReadOnlyList<AccountResponseDto>>(PendingOrRejectedUsers);
         }
     }
 }

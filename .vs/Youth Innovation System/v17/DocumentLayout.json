@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|solutionrelative:youth innovation system\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.service\\postservices\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\postservices\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.service\\notificationservice\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\notificationservice\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BCAAFB0-C019-4214-B7A2-5C680133ACD4}|Youth Innovation System.Service\\Youth Innovation System.Service.csproj|solutionrelative:youth innovation system.service\\identityservices\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{593FD4AF-CFF0-483A-B900-A7631F9660A1}|Youth Innovation System\\Youth Innovation System.APIs.csproj|c:\\users\\micheal\\onedrive\\desktop\\projects\\carshare\\car-rental-system\\youth innovation system\\extensions\\migrate_seedingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,43 +70,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NotificationService.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
-              "RelativeToolTip": "Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T16:36:49.67Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
-              "RelativeToolTip": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAA9wN8AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T16:20:06.346Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Migrate_SeedingData.cs",
-              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
-              "RelativeDocumentMoniker": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
-              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
-              "RelativeToolTip": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\appsettings.json",
+              "RelativeDocumentMoniker": "Youth Innovation System\\appsettings.json",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\appsettings.json",
+              "RelativeToolTip": "Youth Innovation System\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T16:18:55.793Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-06T19:51:49.119Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "GetPendingPostsSpecifications.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Core\\Specifications\\PostSpecifications\\GetPendingPostsSpecifications.cs",
               "RelativeDocumentMoniker": "Youth Innovation System.Core\\Specifications\\PostSpecifications\\GetPendingPostsSpecifications.cs",
@@ -114,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Helpers\\MappingProfile.cs",
               "RelativeDocumentMoniker": "Youth Innovation System\\Helpers\\MappingProfile.cs",
@@ -126,7 +107,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CarPostSearchParamaters.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Core\\Specifications\\PostSpecifications\\CarPostSearchParamaters.cs",
               "RelativeDocumentMoniker": "Youth Innovation System.Core\\Specifications\\PostSpecifications\\CarPostSearchParamaters.cs",
@@ -138,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PostController.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Youth Innovation System\\Controllers\\PostController.cs",
@@ -150,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "EncryptionHelper.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Helpers\\EncryptionHelper.cs",
               "RelativeDocumentMoniker": "Youth Innovation System\\Helpers\\EncryptionHelper.cs",
@@ -162,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "NotificationController.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Controllers\\NotificationController.cs",
               "RelativeDocumentMoniker": "Youth Innovation System\\Controllers\\NotificationController.cs",
@@ -174,16 +155,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "PostService.cs",
               "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\PostServices\\PostService.cs",
               "RelativeDocumentMoniker": "Youth Innovation System.Service\\PostServices\\PostService.cs",
               "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\PostServices\\PostService.cs",
               "RelativeToolTip": "Youth Innovation System.Service\\PostServices\\PostService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAANoAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAgwNoAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-05T20:25:29.141Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "RelativeToolTip": "Youth Innovation System.Service\\IdentityServices\\AuthService.cs",
+              "ViewState": "AgIAABkBAAAAAAAAAAAkwEEBAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:20:06.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Migrate_SeedingData.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "RelativeToolTip": "Youth Innovation System\\Extensions\\Migrate_SeedingData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:18:55.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
+              "RelativeDocumentMoniker": "Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
+              "ToolTip": "C:\\Users\\MICHEAL\\OneDrive\\Desktop\\Projects\\CarShare\\Car-Rental-System\\Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
+              "RelativeToolTip": "Youth Innovation System.Service\\NotificationService\\NotificationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:36:49.67Z"
             }
           ]
         }
