@@ -8,7 +8,7 @@ namespace Youth_Innovation_System.Core.Specifications.PostSpecifications
         public GetPendingPostsSpecifications()
             : base(cp => cp.RentalStatus == CarStatus.Pending.ToString())
         {
-
+            Includes.Add(cr => cr.postImages);
         }
     }
 }

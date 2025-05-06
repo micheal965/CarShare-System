@@ -217,7 +217,14 @@ namespace Youth_Innovation_System.Service.IdentityServices
         }
         private void DeleteRefreshTokenFromCookies()
         {
-            _httpContextAccessor.HttpContext.Response.Cookies.Delete("refreshToken");
+            var cookieOptions = new CookieOptions()
+            {
+                HttpOnly = true,
+                Secure = true,
+                Expires = DateTime.UtcNow.AddDays(-100),
+                SameSite = SameSiteMode.Strict,
+            };
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", "", cookieOptions);
         }
         private RefreshToken GenerateRefreshTokenObject()
         {

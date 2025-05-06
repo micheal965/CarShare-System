@@ -40,6 +40,7 @@ namespace Youth_Innovation_System.Controllers
                 return BadRequest(new ApiResponse(StatusCodes.Status400BadRequest, ex.Message));
             }
         }
+
         //if its rented so cant delete it
         [Authorize(Roles = nameof(UserRoles.CarOwner))]
         [HttpDelete("Delete-Post/{postId}")]

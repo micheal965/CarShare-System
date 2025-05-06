@@ -16,7 +16,6 @@ namespace Youth_Innovation_System.Core.Specifications.PostSpecifications
         public GetAllPostsSpecification()
             : base(p => p.RentalStatus == CarStatus.Accepted.ToString())
         {
-
         }
     }
 }

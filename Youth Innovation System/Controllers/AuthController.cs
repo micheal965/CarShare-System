@@ -94,6 +94,7 @@ namespace Youth_Innovation_System.API.Controllers
             }
 
             var token = authorization.Substring("Bearer ".Length).Trim();
+
             if (string.IsNullOrEmpty(token))
             {
                 return Unauthorized(new ApiResponse(StatusCodes.Status401Unauthorized, "Token is missing or invalid"));
