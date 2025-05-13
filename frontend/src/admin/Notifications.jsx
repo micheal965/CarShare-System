@@ -13,12 +13,15 @@ const Notifications = () => {
 	const [notifications, setNotifications] = useState([]);
 
 	useEffect(() => {
-		const fetchNotification = () => {
+		const fetchNotification = async () => {
 			try {
-				const { data } = axiosClient.get(
+				const { data } = await axiosClient.get(
 					"/Notification/Get-All-Notifications",
-					{ withCredentials: true }
+					{
+						withCredentials: true,
+					}
 				);
+				console.log(data)
 				setNotifications(data);
 			} catch (err) {
 				console.log(err);
@@ -27,14 +30,19 @@ const Notifications = () => {
 			}
 		};
 
+		fetchNotification();
+	}, []);
+
+	useEffect(() => {
 		const newConnection = new HubConnectionBuilder()
-			.withUrl(`${API_URL}/notificationHub`)
+			.withUrl(`${API_URL}/Hubs/notificationHub`, {
+				withCredentials: true
+			})
 			.withAutomaticReconnect()
 			.configureLogging(LogLevel.Information)
 			.build();
 
 		setConnection(newConnection);
-		fetchNotification();
 	}, [API_URL]);
 
 	useEffect(() => {
@@ -45,7 +53,7 @@ const Notifications = () => {
 					console.log("Connected!");
 
 					connection.on("ReceiveNotification", (msg) => {
-						setNotifications(prev => [...prev, msg])
+						setNotifications((prev) => [...prev, msg]);
 					});
 				})
 				.catch((err) => console.error("Connection failed: ", err));
@@ -70,38 +78,39 @@ const Notifications = () => {
 					margin: 0,
 					padding: 0,
 				}}>
-				{notifications.map((message, index) => (
-					<ListItem
-						key={index}
-						sx={{
-							borderBottom: "1px solid #f0f0f0",
-							"&:last-child": {
-								borderBottom: "none",
-							},
-							padding: "1rem",
-							alignItems: "flex-start",
-							cursor: "pointer",
-						}}>
-						<Box
+				{notifications.length > 0 ? (
+					notifications.map((message) => (
+						<ListItem
+							key={message.id}
 							sx={{
-								width: "100%",
-								display: "flex",
-								gap: "0.75rem",
+								borderBottom: "1px solid #f0f0f0",
+								"&:last-child": {
+									borderBottom: "none",
+								},
+								padding: "1rem",
 								alignItems: "flex-start",
+								cursor: "pointer",
 							}}>
 							<Box
 								sx={{
-									flexGrow: 1,
+									width: "100%",
 									display: "flex",
-									flexDirection: "column",
-									gap: "0.5rem",
+									gap: "0.75rem",
+									alignItems: "flex-start",
 								}}>
-								<Notification notification={message} />
+								<Box
+									sx={{
+										flexGrow: 1,
+										display: "flex",
+										flexDirection: "column",
+										gap: "0.5rem",
+									}}>
+									<Notification notification={message} />
+								</Box>
 							</Box>
-						</Box>
-					</ListItem>
-				))}
-				{notifications.length === 0 && (
+						</ListItem>
+					))
+				) : (
 					<ListItem
 						disabled
 						sx={{

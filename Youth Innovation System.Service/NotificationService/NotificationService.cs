@@ -4,7 +4,6 @@ using Youth_Innovation_System.Core.Entities;
 using Youth_Innovation_System.Core.Entities.Identity;
 using Youth_Innovation_System.Core.IRepositories;
 using Youth_Innovation_System.Core.IServices.NotificationServices;
-using Youth_Innovation_System.Core.Roles;
 using Youth_Innovation_System.Service.Hubs;
 
 namespace Youth_Innovation_System.Service.NotificationService
@@ -36,6 +35,7 @@ namespace Youth_Innovation_System.Service.NotificationService
             await _unitOfWork.CompleteAsync();
         }
 
+        [HubMethodName("sendnotification")]
         public async Task NotifyAsync(string userId, string message)
         {
             var notification = new Notification()
@@ -47,13 +47,7 @@ namespace Youth_Innovation_System.Service.NotificationService
             await _unitOfWork.Repository<Notification>().AddAsync(notification);
             await _unitOfWork.CompleteAsync();
 
-            var Admins = await _userManager.GetUsersInRoleAsync(UserRoles.Admin.ToString());
-            var AdminsIds = Admins.Select(a => a.Id).ToList();
-
-            foreach (var AdminId in AdminsIds)
-            {
-                await _hubContext.Clients.User(AdminId).SendAsync("ReceiveNotification", message);
-            }
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", notification);
         }
     }
 }

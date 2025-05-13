@@ -12,9 +12,10 @@ import Typography from "@mui/material/Typography";
 import AdminDashboard from "../admin/AdminDashborad";
 import PendingUsers from "../admin/PendingUsers";
 import HomeIcon from "@mui/icons-material/Home";
-import { PendingPosts } from './../admin/PendingPosts';
+import { PendingPosts } from "./../admin/PendingPosts";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Notifications from './../admin/Notifications';
+import Notifications from "./../admin/Notifications";
+import { Navigate } from "react-router";
 
 const NAVIGATION = [
 	{
@@ -84,9 +85,7 @@ const Skeleton = styled("div")(({ theme, height }) => ({
 	content: '" "',
 }));
 
-function DemoPageContent({
-	pathname,
-}) {
+function DemoPageContent({ pathname }) {
 	let content = null;
 
 	if (pathname === "/dashboard") {
@@ -95,8 +94,10 @@ function DemoPageContent({
 		content = <PendingUsers />;
 	} else if (pathname === "/pending_posts") {
 		content = <PendingPosts />;
-	} else if (pathname === "/notifications") {
+	} else if (pathname === "/notification") {
 		content = <Notifications />;
+	} else if (pathname === "/") {
+		content = <Navigate to="/home" />;
 	} else {
 		content = <Typography>Unknown page</Typography>;
 	}

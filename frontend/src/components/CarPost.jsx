@@ -9,27 +9,27 @@ export const CarPost = ({ car }) => {
 			<CardMedia
 				component="img"
 				height="150"
-				image={car.ImageUrls[0]}
-				alt={`${car.Brand} ${car.Model}`}
+				image={car.imageUrls[0] ? car.imageUrls[0] : null}
+				alt={`${car.brand} ${car.model}`}
 				sx={{ objectFit: "contain", width: "auto" }}
 			/>
 
 			<CardContent>
 				<Typography variant="h6" color="text.secondary" gutterBottom>
-					{car.Title} - {car.Brand} {car.Model} ({car.Year})
+					{car.title} - {car.brand} {car.model} ({car.year})
 				</Typography>
 				<Typography variant="body2" sx={{ marginBottom: 1 }}>
-					{car.Description}
+					{car.description}
 				</Typography>
 				<Typography variant="body2">
-					<strong>Type:</strong> {car.CarType} | <strong>Transmission:</strong>{" "}
-					{car.Transmission} <br />
-					<strong>Location:</strong> {car.Location} <br />
-					<strong>Status:</strong> {car.RentalStatus} <br />
-					<strong>Available From:</strong> {car.AvailabilityStart} to{" "}
-					{car.AvailabilityEnd}
+					<strong>Type:</strong> {car.carType} | <strong>Transmission:</strong>{" "}
+					{car.transmission} <br />
+					<strong>Location:</strong> {car.location} <br />
+					<strong>Status:</strong> {car.rentalStatus} <br />
+					<strong>Available From:</strong> {car.availabilityStart.split("T")[0]}{" "}
+					to {car.availabilityEnd.split("T")[0]}
 					<br />
-					<strong>Price:</strong> ${car.RentalPrice}/day
+					<strong>Price:</strong> ${car.rentalPrice}/day
 				</Typography>
 			</CardContent>
 		</>

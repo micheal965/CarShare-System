@@ -5,7 +5,6 @@ import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
 import Home from "./views/home";
 import NotFoundPage from "./views/not_found";
-// import MyAccount from "./views/myAccount";
 import { CarPostDetails } from "./views/CarPostDetails";
 import AdminLayout from "./components/adminLayout";
 import AdminDashboard from "./admin/AdminDashborad";
@@ -17,13 +16,14 @@ import { EditPostForm } from "./views/EditPostForm";
 import Proposals from './views/Proposals';
 import AddOfferForm from './views/AddOfferForm';
 import Notifications from './admin/Notifications';
+import SearchResult from './views/SearchResult';
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <DefaultLayout />,
 		children: [
-			// { path: "/account", element: <MyAccount /> },
+			{ path: "/search-result", element: <SearchResult /> },
 			{ path: "/car", element: <CarPostDetails /> },
 			{ path: "/posts", element: <OwnerPosts /> },
 			{ path: "/create-post", element: <AddPostForm /> },

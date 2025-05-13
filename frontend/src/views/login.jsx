@@ -11,6 +11,7 @@ import axiosClient from "../axiosClient";
 import { useStateContext } from "../context/contextprovider";
 import { Typography, Alert, AlertTitle } from "@mui/material";
 import DarkModeButton from "./../components/darkmodeButton";
+import {useNavigate} from "react-router"
 
 export default function Login() {
 	const emailRef = useRef();
@@ -18,6 +19,8 @@ export default function Login() {
 	const { setUser, setToken } = useStateContext();
 	const [err, setErr] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate()
+
 
 	const submit = (ev) => {
 		ev.preventDefault();
@@ -32,21 +35,25 @@ export default function Login() {
 			.post("/Auth/Login", payload)
 			.then(({ data }) => {
 				const userData = {
-					id: data.Id,
-					username: data.Username,
-					email: data.Email,
-					userRole: data.Roles[0],
+					id: data.id,
+					username: data.username,
+					email: data.email,
+					userRole: data.roles[0],
 					profilePic: data.profilePicture,
 				};
 
 				setUser(userData);
 				setToken(data.token);
+				navigate("/home")
 			})
 			.catch((err) => {
 				const response = err.response;
-				console.log(err);
 				if (response) {
-					setErr(response.data.message);
+					setErr(
+						response.data?.errors
+							? response.data?.errors[0]
+							: response.data?.message
+					);
 				}
 			})
 			.finally(() => {

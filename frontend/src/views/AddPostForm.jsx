@@ -56,14 +56,24 @@ export const AddPostForm = () => {
 		formData.append("Transmission", transmission);
 		formData.append("Location", locationRef.current.value);
 		formData.append("RentalPrice", priceRef.current.value);
-		formData.append("Images", titleRef.current.value);
+		formData.append("Images", imageFile);
 
 		try {
-			await axiosClient.post("/Post/Create-Post", formData);
+			const { data } = await axiosClient.post("/Post/Create-Post", formData, {
+				headers: { "Content-Type": "multipart/form-data" },
+				withCredentials: true,
+			});
 
-			setMsg("Post created successfully");
-		} catch {
-			setErr("error creating post");
+			setMsg(data.message || "Post added successfully");
+		} catch (err) {
+			const response = err.response;
+			if (response) {
+				setErr(
+					response.data?.errors
+						? response.data?.errors[0]
+						: response.data?.message
+				);
+			}
 		} finally {
 			setIsLoading(false);
 		}

@@ -221,7 +221,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 HttpOnly = true,
                 Secure = true,
                 Expires = DateTime.UtcNow.AddDays(-100),
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
             };
             _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", "", cookieOptions);
         }
@@ -246,7 +246,7 @@ namespace Youth_Innovation_System.Service.IdentityServices
                 HttpOnly = true,
                 Secure = true,
                 Expires = expires,
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
             };
             _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", token, cookieOptions);
         }

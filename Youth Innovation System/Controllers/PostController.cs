@@ -104,7 +104,7 @@ namespace Youth_Innovation_System.Controllers
             }
         }
         [HttpGet("Get-All-Posts")]
-        public async Task<IActionResult> GetAllPosts(GetAllPostsDto getAllPostsDto)
+        public async Task<IActionResult> GetAllPosts([FromQuery] GetAllPostsDto getAllPostsDto)
         {
             try
             {

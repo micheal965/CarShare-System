@@ -26,7 +26,6 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Link, Avatar, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const drawerWidth = 240;
@@ -193,18 +192,17 @@ export default function MiniDrawer() {
 		setAnchorEl(null);
 		handleMobileMenuClose();
 	};
-	const handleMyAccont = () => {
-		navigate("/account");
-	};
 
 	const handleMobileMenuOpen = (event) => {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
-	const { setUser, setToken, user } = useStateContext();
+	const { setUser, setToken, user, token, logout } = useStateContext();
+
 	const handlelogout = (ev) => {
 		ev.preventDefault();
 		setUser(null);
 		setToken(null);
+		logout();
 	};
 
 	const menuId = "primary-search-account-menu";
@@ -223,18 +221,33 @@ export default function MiniDrawer() {
 			}}
 			open={isMenuOpen}
 			onClose={handleMenuClose}>
-			<MenuItem onClick={handleMyAccont}>My account</MenuItem>
-			<MenuItem onClick={handlelogout}>Log Out</MenuItem>
+			{token ? (
+				<MenuItem onClick={handlelogout}>Log Out</MenuItem>
+			) : (
+				<>
+					<MenuItem onClick={() => navigate("/login")}>Login</MenuItem>
+					<MenuItem onClick={() => navigate("/register")}>Register</MenuItem>
+				</>
+			)}
 		</Menu>
 	);
 
 	const mobileMenuId = "primary-search-account-menu-mobile";
-	
 
 	const handleSearchQuery = (ev) => {
-		ev.preventDefault()
-		
-	}
+		ev.preventDefault();
+		let API_CALL = "/Post/Search-For-Cars?";
+		const query = ev.current.value;
+		if (isNaN(parseInt(query))) {
+			API_CALL += `RentalPrice=${parseInt(query)}`;
+		}
+		API_CALL += `CarType=${query}`;
+		navigate("/search-result", {
+			state: {
+				query: API_CALL,
+			},
+		});
+	};
 
 	const renderMobileMenu = (
 		<Menu
@@ -268,7 +281,7 @@ export default function MiniDrawer() {
 				</IconButton>
 				<p>Profile</p>
 			</MenuItem>
-			{user === null && (
+			{token === null && (
 				<>
 					<MenuItem>
 						<Button onClick={() => navigate("/login")}>login</Button>
@@ -321,6 +334,7 @@ export default function MiniDrawer() {
 							freeSolo
 							id="custom-search"
 							onChange={(ev) => handleSearchQuery(ev)}
+							disabled={token === null || token === undefined}
 							renderInput={(params) => (
 								<TextField
 									{...params}
@@ -442,14 +456,17 @@ export default function MiniDrawer() {
 							/>
 						</ListItemButton>
 					</ListItem>
-					{user?.userRole !== "owner" ? null : (
+					{
 						<ListItem
 							key={"Posts"}
 							component="a"
 							href="/posts"
 							disablePadding
 							sx={{
-								display: "block",
+								display:
+									user?.userRole === "CarOwner"
+										? "block"
+										: "none",
 								textDecoration: "none",
 								color: theme.palette.text.primary,
 								"&:visited": {
@@ -503,69 +520,8 @@ export default function MiniDrawer() {
 								/>
 							</ListItemButton>
 						</ListItem>
-					)}
-					{user?.userRole !== "owner" ? null :  (
-						<ListItem
-							key={"Proposals"}
-							component="a"
-							href="/proposals"
-							disablePadding
-							sx={{
-								display: "block",
-								textDecoration: "none",
-								color: theme.palette.text.primary,
-								"&:visited": {
-									color: theme.palette.text.primary,
-								},
-								"&:hover": {
-									textDecoration: "none",
-								},
-							}}>
-							<ListItemButton
-								sx={[
-									{
-										minHeight: 48,
-										px: 2.5,
-									},
-									open
-										? {
-												justifyContent: "initial",
-											}
-										: {
-												justifyContent: "center",
-											},
-								]}>
-								<ListItemIcon
-									sx={[
-										{
-											minWidth: 0,
-											justifyContent: "center",
-										},
-										open
-											? {
-													mr: 3,
-												}
-											: {
-													mr: "auto",
-												},
-									]}>
-									<HowToVoteIcon />
-								</ListItemIcon>
-								<ListItemText
-									primary={"Proposals"}
-									sx={[
-										open
-											? {
-													opacity: 1,
-												}
-											: {
-													opacity: 0,
-												},
-									]}
-								/>
-							</ListItemButton>
-						</ListItem>
-					)}{" "}
+					}
+					
 					<ListItem
 						key={"Admin Pannel"}
 						component="a"

@@ -47,11 +47,13 @@ namespace Youth_Innovation_System.Extensions
                     {
                         OnMessageReceived = context =>
                         {
-                            var accessToken = context.Request.Query["access_token"];
+                            if (context.Request.Cookies.TryGetValue("access_token", out var token))
+                                context.Token = token;
+
                             var path = context.HttpContext.Request.Path;
-                            if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/chathub")))
+                            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/Hubs/NotificationHub")))
                             {
-                                context.Token = accessToken;
+                                context.Token = token;
                             }
                             return Task.CompletedTask;
                         }

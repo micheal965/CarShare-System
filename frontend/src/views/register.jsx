@@ -13,6 +13,7 @@ import axiosClient from "../axiosClient";
 import AlertTitle from "@mui/material/AlertTitle";
 import { Alert, Typography, Box, Avatar } from "@mui/material";
 import DarkModeButton from "./../components/darkmodeButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
 	const firstNameRef = useRef();
@@ -21,6 +22,7 @@ export default function Register() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
+	const navigate = useNavigate();
 
 	const [err, setErr] = useState(null);
 	const [msg, setMsg] = useState(null);
@@ -37,36 +39,44 @@ export default function Register() {
 		ev.preventDefault();
 		setIsButtonLoading(true);
 		setErr("");
-		if (passwordRef.current.value == confirmPasswordRef.current.value) {
-			const formData = new FormData();
-			formData.append("FirstName", firstNameRef.current.value);
-			formData.append("LastName", lastNameRef.current.value);
-			formData.append("PhoneNumber", phoneNumberRef.current.value);
-			formData.append("Email", emailRef.current.value);
-			formData.append("Password", passwordRef.current.value);
-			formData.append("ConfirmPassword", passwordRef.current.value);
 
-			formData.append("role", isCarOwner ? 0 : 1);
-			formData.append("ProfilePicture", imageFile);
-
-			axiosClient
-				.post("/Auth/Register", formData)
-				.then(() => {
-					setMsg("Registered Successfully!");
-				})
-				.catch((err) => {
-					const response = err.response;
-					console.log(response.data.message);
-					if (response) {
-						setErr(response.data.message);
-					}
-				})
-				.finally(() => setIsButtonLoading(false));
-		} else {
+		if (passwordRef.current.value !== confirmPasswordRef.current.value) {
 			setErr("Passwords do not match.");
 			setIsButtonLoading(false);
-			console.log(err);
+			return;
 		}
+
+		const formData = new FormData();
+		formData.append("Email", emailRef.current.value);
+		formData.append("Password", passwordRef.current.value);
+		formData.append("ConfirmPassword", passwordRef.current.value);
+		formData.append("FirstName", firstNameRef.current.value);
+		formData.append("LastName", lastNameRef.current.value);
+		formData.append("PhoneNumber", phoneNumberRef.current.value);
+
+		if (imageFile) formData.append("ProfilePicture", imageFile);
+		formData.append("role", isCarOwner ? "0" : "1");
+
+		axiosClient
+			.post("/Auth/Register", formData, {
+				headers: { "Content-Type": "multipart/form-data" },
+				withCredentials: true,
+			})
+			.then(({ data }) => {
+				setMsg(data.message || "Registered Successfully!");
+				navigate("/home");
+			})
+			.catch((err) => {
+				const response = err.response;
+				if (response) {
+					setErr(
+						response.data?.errors
+							? response.data?.errors[0]
+							: response.data?.message
+					);
+				}
+			})
+			.finally(() => setIsButtonLoading(false));
 	};
 
 	return (

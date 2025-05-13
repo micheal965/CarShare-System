@@ -67,6 +67,7 @@ const PendingUsers = () => {
 						withCredentials: true,
 					}
 				);
+				console.log(data)
 
 				setPendingUsers(data);
 			} catch (err) {
@@ -116,7 +117,7 @@ const PendingUsers = () => {
 									mb: 2,
 								}}>
 								<Avatar
-									src={user.profilePicture ? user.ProfilePicture : null}
+									src={user.profilePicture ? user.profilePicture : null}
 									alt={user.email}
 									style={{
 										width: 80,
@@ -128,7 +129,7 @@ const PendingUsers = () => {
 								/>
 							</Box>
 							<Typography variant="h6" gutterBottom>
-								{user.username}
+								username: {user.username}
 							</Typography>
 							<Typography color="text.secondary">
 								Email: {user.email}

@@ -25,6 +25,7 @@ export const PendingPosts = () => {
 				const { data } = await axiosClient.get("/Post/Get-Pending-Posts", {
 					withCredentials: true,
 				});
+				console.log(data);
 
 				setPendingPosts(data);
 			} catch (err) {
@@ -84,8 +85,8 @@ export const PendingPosts = () => {
 				</Alert>
 			)}
 			{pendingPosts.length > 0 ? (
-				pendingPosts.map((post) => (
-					<Card variant="outlined" sx={{ marginY: "1rem" }} key={post.id}>
+				pendingPosts.map((post, index) => (
+					<Card variant="outlined" sx={{ marginY: "1rem" }} key={index}>
 						<CarPost car={post} />
 						<CardActions sx={{ display: "flex", gap: 2, mt: 2 }}>
 							<FormButton
@@ -116,7 +117,7 @@ export const PendingPosts = () => {
 						display: "flex",
 						width: "auto",
 					}}>
-					No Pending users!
+					No Pending Posts!
 				</Typography>
 			)}
 		</Container>

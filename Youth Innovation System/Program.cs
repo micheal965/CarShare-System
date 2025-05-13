@@ -68,7 +68,7 @@ namespace Youth_Innovation_System
             app.UseAuthorization();
 
             //app.MapHub<ChatHub>("/chathub").RequireAuthorization();
-            app.MapHub<NotificationHub>("/notificationHub");
+            app.MapHub<NotificationHub>("/Hubs/NotificationHub");
             app.MapControllers();
             app.Run();
         }

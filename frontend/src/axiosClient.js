@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -16,8 +17,10 @@ export const registerAuthInterceptors = ({ refreshAuth, logout }) => {
 	logoutCallback = logout;
 
 	axiosClient.interceptors.request.use((config) => {
-		const token = localStorage.getItem("access_token");
-		if (token) config.headers.Authorization = `Bearer ${token}`;
+		const token = Cookies.get("access_token");
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
 		return config;
 	});
 
@@ -25,13 +28,14 @@ export const registerAuthInterceptors = ({ refreshAuth, logout }) => {
 		(res) => res,
 		async (error) => {
 			const originalRequest = error.config;
-			if (error.response?.status === 401 && !originalRequest._retry) {
+			if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest._retry) {
 				originalRequest._retry = true;
 				try {
 					const newToken = await refreshAuthCallback();
 					originalRequest.headers.Authorization = `Bearer ${newToken}`;
 					return axiosClient(originalRequest);
-				} catch {
+				} catch (error) {
+					console.log("Refresh Token Expired");
 					logoutCallback();
 					return Promise.reject(error);
 				}

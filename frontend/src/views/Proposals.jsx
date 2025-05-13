@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from "react";
 import axiosClient from "./../axiosClient";
 import { FormButton } from "../components/StyledComponents";
-import { convertImage } from "./../utils/convertImage";
 import { useSearchParams } from "react-router";
 
 const Proposals = () => {
@@ -63,8 +62,8 @@ const Proposals = () => {
 		axiosClient
 			.get(`/Offer/Get-Offers/${postId}`, { withCredentials: true })
 			.then(({ data }) => {
-				setProposals(data);
 				console.log(data);
+				setProposals(data);
 			})
 			.catch(() => {
 				setErr("Failed to load proposals.");
@@ -111,7 +110,7 @@ const Proposals = () => {
 								sx={{ display: "flex", alignItems: "center", mb: 2, gap: 2 }}>
 								<Avatar
 									src={
-										p.renter.avatar ? convertImage(p.renter.avatar.data) : null
+										p.renter.avatar ? p.renter.avatar : null
 									}
 									alt={`${p.renter.first_name} ${p.renter.last_name}`}
 									sx={{ width: 64, height: 64, objectFit: "cover" }}

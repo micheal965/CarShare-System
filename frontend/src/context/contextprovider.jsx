@@ -7,6 +7,7 @@ import {
 	useRef,
 } from "react";
 import axiosClient, { registerAuthInterceptors } from "../axiosClient";
+import Cookies from "js-cookie";
 
 const StateContext = createContext({
 	user: null,
@@ -25,9 +26,7 @@ export const ContextProvider = ({ children }) => {
 		const u = localStorage.getItem("user");
 		return u ? JSON.parse(u) : null;
 	});
-	const [token, _setToken] = useState(() =>
-		localStorage.getItem("access_token")
-	);
+	const [token, _setToken] = useState(() => Cookies.get("access_token"));
 	const [settings, _setSettings] = useState(() => {
 		const savedSettings = localStorage.getItem("user_settings");
 		return savedSettings
@@ -38,8 +37,8 @@ export const ContextProvider = ({ children }) => {
 
 	const setToken = useCallback((newToken) => {
 		_setToken(newToken);
-		if (newToken) localStorage.setItem("access_token", newToken);
-		else localStorage.removeItem("access_token");
+		if (newToken) Cookies.set("access_token", newToken, { expires: 60, sameSite:"None",secure:true });
+		else Cookies.remove("access_token");
 	}, []);
 
 	const setUser = useCallback((user) => {
@@ -48,13 +47,15 @@ export const ContextProvider = ({ children }) => {
 		else localStorage.removeItem("user");
 	}, []);
 
+	
+
 	const logout = useCallback(() => {
 		axiosClient
 			.post("/Auth/Logout", {}, { withCredentials: true })
 			.finally(() => {
 				setUser(null);
 				setToken(null);
-				
+
 				window.location.href = "/login";
 			});
 	}, [setUser, setToken]);
@@ -71,19 +72,17 @@ export const ContextProvider = ({ children }) => {
 		});
 	}, []);
 
-	
-
 	const refreshAuth = useCallback(async () => {
 		if (refreshPromise.current) return refreshPromise.current;
 
 		refreshPromise.current = axiosClient
-			.post("/users/refresh", {}, { withCredentials: true })
+			.post("/Auth/Rotate-Refresh-Token", {}, { withCredentials: true })
 			.then((res) => {
-				if (!res.data?.accessToken) {
+				if (!res.data?.token) {
 					throw new Error("No access token in response");
 				}
-				setToken(res.data.accessToken);
-				return res.data.accessToken;
+				setToken(res.data.token);
+				return res.data.token;
 			})
 			.catch((err) => {
 				logout();
@@ -96,8 +95,12 @@ export const ContextProvider = ({ children }) => {
 		return refreshPromise.current;
 	}, [logout, setToken]);
 
+	const didRegister = useRef(false);
 	useEffect(() => {
-		registerAuthInterceptors({ refreshAuth, logout });
+		if (!didRegister.current) {
+			registerAuthInterceptors({ refreshAuth, logout });
+			didRegister.current = true;
+		}
 	}, [refreshAuth, logout]);
 
 	return (

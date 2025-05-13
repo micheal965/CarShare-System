@@ -38,9 +38,10 @@ export const OwnerPosts = () => {
 					`/Post/Get-User-Posts?userId=${user.id}`,
 					{ withCredentials: true }
 				);
-				setPosts(data);
+
+				setPosts(data.items);
 			} catch (err) {
-				console.log(err.message || "error loading posts");
+				console.log(err.response.data.message || "error loading posts");
 			} finally {
 				setIsloading(false);
 			}
@@ -143,11 +144,13 @@ export const OwnerPosts = () => {
 								selected={selectedPostId === post.id}
 								hover
 								sx={{ cursor: "pointer" }}>
-								<TableCell>{post.CarType}</TableCell>
-								<TableCell>{post.Brand}</TableCell>
-								<TableCell>{post.Model}</TableCell>
-								<TableCell>{post.RentalPrice}</TableCell>
-								<TableCell>{post.ImageUrls[0]}</TableCell>
+								<TableCell>{post.carType}</TableCell>
+								<TableCell>{post.brand}</TableCell>
+								<TableCell>{post.model}</TableCell>
+								<TableCell>{post.rentalPrice}</TableCell>
+								<TableCell>
+									{post.imageUrls[0] ? post.imageUrls[0] : null}
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
