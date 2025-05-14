@@ -34,6 +34,9 @@ export const AddPostForm = () => {
 	const [transmission, setTransmission] = useState("");
 	const [imageFile, setImageFile] = useState(null);
 	const [previewUrl, setPreviewUrl] = useState(undefined);
+	// at the top, alongside your other useState calls:
+	const [availabilityStart, setAvailabilityStart] = useState("");
+	const [availabilityEnd, setAvailabilityEnd] = useState("");
 
 	const handleFileChange = (e) => {
 		const selected = e.target.files?.[0] ?? null;
@@ -56,6 +59,9 @@ export const AddPostForm = () => {
 		formData.append("Transmission", transmission);
 		formData.append("Location", locationRef.current.value);
 		formData.append("RentalPrice", priceRef.current.value);
+		formData.append("AvailabilityStart", availabilityStart);
+		formData.append("AvailabilityEnd", availabilityEnd);
+
 		formData.append("Images", imageFile);
 
 		try {
@@ -180,6 +186,26 @@ export const AddPostForm = () => {
 							label="Price per Day"
 							type="number"
 							variant="standard"
+							required
+						/>
+
+						<FormTextField
+							label="Availability Start"
+							type="date"
+							variant="standard"
+							InputLabelProps={{ shrink: true }}
+							value={availabilityStart}
+							onChange={(e) => setAvailabilityStart(e.target.value)}
+							required
+						/>
+
+						<FormTextField
+							label="Availability End"
+							type="date"
+							variant="standard"
+							InputLabelProps={{ shrink: true }}
+							value={availabilityEnd}
+							onChange={(e) => setAvailabilityEnd(e.target.value)}
 							required
 						/>
 

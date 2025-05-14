@@ -23,8 +23,9 @@ namespace Youth_Innovation_System.Helpers
             CreateMap<CarPost, PostResponseDto>()
                 .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.postImages.Select(pi => pi.imageUrl)))
                 .ForMember(dest => dest.Feedbacks, opt => opt.MapFrom(src => src.CarFeedbacks))
-              .ForMember(dest => dest.Description, opt => opt.MapFrom(src => EncryptionHelper.Decrypt(src.Description)));
+               .ForMember(dest => dest.Description, opt => opt.MapFrom(src => EncryptionHelper.Decrypt(src.Description)));
 
+            CreateMap<CarFeedback, CarFeedbackDto>();
 
             CreateMap<UpdatePostDto, CarPost>()
           .ForMember(dest => dest.Description, opt => opt.MapFrom((src) =>
@@ -40,7 +41,8 @@ namespace Youth_Innovation_System.Helpers
                 .ForMember(dest => dest.profilePicture,
                 opt => opt.MapFrom(src => src.pictureUrl));
 
-            CreateMap<RentalApplication, RentalApplicationDto>();
+            CreateMap<RentalApplication, RentalApplicationResponseDto>();
+
         }
     }
 }

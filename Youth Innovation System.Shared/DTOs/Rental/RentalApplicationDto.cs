@@ -7,8 +7,8 @@ namespace Youth_Innovation_System.Shared.DTOs.Rental
     {
         public int CarId { get; set; }
         [Required]
-        public IFormFile LicenseFile { get; set; }
+        public IFormFile licenseFile { get; set; }
         [Required]
-        public IFormFile ProposalFile { get; set; }
+        public IFormFile proposalFile { get; set; }
     }
 }

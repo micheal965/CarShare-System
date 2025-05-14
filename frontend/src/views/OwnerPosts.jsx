@@ -13,6 +13,7 @@ import {
 	DialogTitle,
 	DialogContent,
 	DialogActions,
+	Avatar,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { FormButton } from "../components/StyledComponents";
@@ -63,7 +64,7 @@ export const OwnerPosts = () => {
 			await axiosClient.delete(`/Post/Delete-Post/${selectedPostId}`, {
 				withCredentials: true,
 			});
-			setSelectedPostId((prev) =>
+			setPosts((prev) =>
 				prev.filter((post) => post.id !== selectedPostId)
 			);
 			setSelectedPostId(null);
@@ -149,7 +150,11 @@ export const OwnerPosts = () => {
 								<TableCell>{post.model}</TableCell>
 								<TableCell>{post.rentalPrice}</TableCell>
 								<TableCell>
-									{post.imageUrls[0] ? post.imageUrls[0] : null}
+									{post.imageUrls[0] ? (
+										<Avatar src={post.imageUrls[0]} />
+									) : (
+										<Avatar src={null} />
+									)}
 								</TableCell>
 							</TableRow>
 						))}

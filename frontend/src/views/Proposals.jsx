@@ -1,5 +1,4 @@
 import {
-	Avatar,
 	Card,
 	CardContent,
 	Container,
@@ -12,10 +11,13 @@ import {
 import { useEffect, useState } from "react";
 import axiosClient from "./../axiosClient";
 import { FormButton } from "../components/StyledComponents";
-import { useSearchParams } from "react-router";
+import { useParams } from "react-router";
+import Button from "@mui/material/Button";
+import DescriptionIcon from "@mui/icons-material/Description";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
 const Proposals = () => {
-	const { postId } = useSearchParams();
+	const { postId } = useParams();
 
 	const [proposals, setProposals] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -27,9 +29,12 @@ const Proposals = () => {
 	const handleApprove = async (proposalId) => {
 		setButtonLoading(true);
 		try {
-			await axiosClient.post(
-				`/Offer/Accept/${proposalId}`,
-				{},
+			await axiosClient.put(
+				`/Rental/Review`,
+				{
+					applicationId: proposalId,
+					isAccepted: true,
+				},
 				{ withCredentials: true }
 			);
 			setProposals((prev) => prev.filter((p) => p.id !== proposalId));
@@ -44,9 +49,12 @@ const Proposals = () => {
 	const handleReject = async (proposalId) => {
 		setButtonLoading(true);
 		try {
-			await axiosClient.post(
-				`/Offer/Refuse/${proposalId}`,
-				{},
+			await axiosClient.put(
+				`/Rental/Review`,
+				{
+					applicationId: proposalId,
+					isAccepted: false,
+				},
 				{ withCredentials: true }
 			);
 			setProposals((prev) => prev.filter((p) => p.id !== proposalId));
@@ -59,19 +67,30 @@ const Proposals = () => {
 	};
 
 	useEffect(() => {
-		axiosClient
-			.get(`/Offer/Get-Offers/${postId}`, { withCredentials: true })
-			.then(({ data }) => {
-				console.log(data);
-				setProposals(data);
-			})
-			.catch(() => {
-				setErr("Failed to load proposals.");
-			})
-			.finally(() => {
-				setLoading(false);
-			});
+		const fetchData = async () => {
+			await axiosClient
+				.get(`/Rental/Get-All-Pending-RentalApps/${postId}`, {
+					withCredentials: true,
+				})
+				.then(({ data }) => {
+					console.log(data);
+					setProposals(data);
+				})
+				.catch(() => setErr("Failed to load proposals."))
+				.finally(() => setLoading(false));
+		};
+
+		fetchData();
 	}, [postId]);
+
+	const daysSinceApplication = (date) => {
+		const applicationDate = new Date(date);
+		const now = new Date();
+
+		const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+		return Math.floor((now - applicationDate) / MS_PER_DAY);
+	};
 
 	if (loading) {
 		return (
@@ -106,40 +125,52 @@ const Proposals = () => {
 				proposals.map((p) => (
 					<Card key={p.id} variant="outlined" sx={{ my: 2 }}>
 						<CardContent>
+							{/* New file links */}
 							<Box
-								sx={{ display: "flex", alignItems: "center", mb: 2, gap: 2 }}>
-								<Avatar
-									src={
-										p.renter.avatar ? p.renter.avatar : null
-									}
-									alt={`${p.renter.first_name} ${p.renter.last_name}`}
-									sx={{ width: 64, height: 64, objectFit: "cover" }}
-								/>
-								<Box>
-									<Typography variant="h6">
-										{p.renter.first_name} {p.renter.last_name}
-									</Typography>
-									<Typography color="text.secondary">
-										{p.renter.email}
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									gap: 1,
+									mt: 2,
+								}}>
+								{p.licenseFileUrl && (
+									<Button
+										component="a"
+										href={p.licenseFileUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										startIcon={<PictureAsPdfIcon />}
+										variant="outlined"
+										size="small">
+										View License
+									</Button>
+								)}
+								{p.proposalFileUrl && (
+									<Button
+										component="a"
+										href={p.proposalFileUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										startIcon={<DescriptionIcon />}
+										variant="outlined"
+										size="small">
+										View Proposal
+									</Button>
+								)}
+
+								<Box sx={{ mt: 1 }}>
+									<Typography variant="body2" color="text.secondary">
+										Rented from {daysSinceApplication(p.applicationDate)} day
+										{daysSinceApplication(p.applicationDate) !== 1
+											? "s"
+											: ""}{" "}
+										ago
 									</Typography>
 								</Box>
 							</Box>
 
-							<Typography gutterBottom>
-								<strong>Car:</strong> {p.car.brand} {p.car.model} ({p.car.year})
-							</Typography>
-							<Typography gutterBottom>
-								<strong>Requested Dates:</strong> {p.availableFrom} –{" "}
-								{p.availableTo}
-							</Typography>
-							<Typography gutterBottom>
-								<strong>Proposed Price:</strong> ${p.proposedPrice}/day
-							</Typography>
-							<Typography gutterBottom>
-								<strong>Message:</strong> {p.message || "—"}
-							</Typography>
-
-							<Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+							{/* Approve/Reject buttons */}
+							<Box sx={{ display: "flex", gap: 1, mt: 3 }}>
 								<FormButton
 									variant="contained"
 									color="success"

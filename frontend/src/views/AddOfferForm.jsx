@@ -14,10 +14,10 @@ import {
 	Typography,
 } from "@mui/material";
 import axiosClient from "../axiosClient";
-import { useSearchParams } from "react-router";
+import { useParams } from "react-router";
 
 const AddOfferForm = () => {
-	const { postId } = useSearchParams();
+	const { postId } = useParams();
 	const [err, setErr] = useState(null);
 	const [msg, setMsg] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -42,12 +42,14 @@ const AddOfferForm = () => {
 		setIsLoading(true);
 
 		const formData = new FormData();
+		formData.append("CarId", postId);
 		formData.append("LicenseFile", licenseFile);
 		formData.append("ProposalFile", proposalFile);
 
 		try {
-			await axiosClient.post(`/Rental/Apply?CarId=${postId}`, formData, {
+			await axiosClient.post("/Rental/Apply", formData, {
 				withCredentials: true,
+				headers: { "Content-Type": "multipart/form-data" },
 			});
 			setMsg("Offer Applied successfully");
 		} catch (err) {

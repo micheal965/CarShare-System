@@ -25,8 +25,8 @@ namespace Youth_Innovation_System.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var result = await _rentalApplicationService.ApplyForRentalAsync(userId,
                                                        rentalApplicationDto.CarId,
-                                                       rentalApplicationDto.LicenseFile,
-                                                       rentalApplicationDto.ProposalFile);
+                                                       rentalApplicationDto.licenseFile,
+                                                       rentalApplicationDto.proposalFile);
             return StatusCode(result.StatusCode, result);
 
         }
@@ -68,7 +68,6 @@ namespace Youth_Innovation_System.Controllers
             {
                 return NotFound(new ApiResponse(StatusCodes.Status404NotFound, ex.Message));
             }
-
         }
     }
 }

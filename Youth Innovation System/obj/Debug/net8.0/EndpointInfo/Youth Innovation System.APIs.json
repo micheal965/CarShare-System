@@ -893,26 +893,26 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "LicenseFile",
-                  "ProposalFile"
+                  "licenseFile",
+                  "proposalFile"
                 ],
                 "type": "object",
                 "properties": {
-                  "LicenseFile": {
+                  "licenseFile": {
                     "type": "string",
                     "format": "binary"
                   },
-                  "ProposalFile": {
+                  "proposalFile": {
                     "type": "string",
                     "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "LicenseFile": {
+                "licenseFile": {
                   "style": "form"
                 },
-                "ProposalFile": {
+                "proposalFile": {
                   "style": "form"
                 }
               }

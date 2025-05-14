@@ -71,7 +71,7 @@ export default function Login() {
 					</Alert>
 				)}
 
-				<FormTitle className="title">Login To Your Account</FormTitle>
+				<FormTitle className="title">Login</FormTitle>
 				<form onSubmit={submit}>
 					<FormTextField
 						inputRef={emailRef}

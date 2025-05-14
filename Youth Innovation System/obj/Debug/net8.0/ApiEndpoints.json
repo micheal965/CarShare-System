@@ -501,7 +501,7 @@
       },
       {
         "Name": "Year",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -516,17 +516,17 @@
       },
       {
         "Name": "AvailabilityStart",
-        "Type": "System.DateTime",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "AvailabilityEnd",
-        "Type": "System.DateTime",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "RentalPrice",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -551,12 +551,12 @@
         "IsRequired": false
       },
       {
-        "Name": "LicenseFile",
+        "Name": "licenseFile",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
       {
-        "Name": "ProposalFile",
+        "Name": "proposalFile",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }

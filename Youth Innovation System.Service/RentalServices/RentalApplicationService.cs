@@ -75,7 +75,7 @@ namespace Youth_Innovation_System.Service.RentalServices
             return new ApiResponse(StatusCodes.Status200OK, "Rental application submitted successfully.");
         }
 
-        public async Task<IReadOnlyList<RentalApplicationDto>> ReviewAllPendingApplicationsAsync(string userId, int CarPostId)
+        public async Task<IReadOnlyList<RentalApplicationResponseDto>> ReviewAllPendingApplicationsAsync(string userId, int CarPostId)
         {
             GetPostForShowingPendingAppsSpecifications spec = new GetPostForShowingPendingAppsSpecifications(userId, CarPostId);
 
@@ -83,8 +83,7 @@ namespace Youth_Innovation_System.Service.RentalServices
             if (post == null) throw new NotFoundException("No post found");
 
             var RentalApps = post.RentalApplications.Where(RA => RA.Status == RentalAppStatus.Pending.ToString()).ToList();
-
-            return _mapper.Map<IReadOnlyList<RentalApplicationDto>>(RentalApps);
+            return _mapper.Map<IReadOnlyList<RentalApplicationResponseDto>>(RentalApps);
         }
 
         public async Task<ApiResponse> ReviewRentalApplicationAsync(string userId, int applicationId, bool isAccepted)
@@ -98,12 +97,16 @@ namespace Youth_Innovation_System.Service.RentalServices
             var CarPostRepo = _unitOfWork.Repository<CarPost>();
 
             var car = await CarPostRepo.GetAsync(application.PostId);
+
             if (car == null)
                 return new ApiResponse(StatusCodes.Status404NotFound, "Car post not found.");
 
             // Check if the user is the owner of the car
             if (car.OwnerId != userId)
                 return new ApiResponse(StatusCodes.Status401Unauthorized, "You are not authorized to review this rental application.");
+
+            if (car.RentalStatus == CarStatus.Rented.ToString() && isAccepted)
+                return new ApiResponse(StatusCodes.Status400BadRequest, "The car is already rented!");
 
             // Update the status based on acceptance
             application.Status = isAccepted ? RentalAppStatus.Approved.ToString() : RentalAppStatus.Rejected.ToString();

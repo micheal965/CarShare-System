@@ -35,9 +35,9 @@ const SearchResult = () => {
 			axiosClient
 				.get(query)
 				.then(({ data }) => {
-					console.log(data);
-					setPosts(data);
-					setTotalCount(data.length);
+					console.log(query);
+					setPosts(data.items);
+					setTotalCount(data.items.length);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -104,7 +104,7 @@ const SearchResult = () => {
 					color="primary"
 				/>
 			</Box>
-			{posts.length > 0 ? (
+			{totalCount > 0 ? (
 				posts.map((car) => (
 					<Card variant="outlined" key={car.id} sx={{ marginY: "1rem" }}>
 						<CarPost car={car} />

@@ -8,7 +8,7 @@ namespace Youth_Innovation_System.Core.IServices.Rental
     {
         Task<ApiResponse> ApplyForRentalAsync(string renterId, int carPostId, IFormFile licenseFile, IFormFile proposalFile);
         Task<ApiResponse> ReviewRentalApplicationAsync(string userId, int applicationId, bool isAccepted);
-        Task<IReadOnlyList<RentalApplicationDto>> ReviewAllPendingApplicationsAsync(string userId, int CarPostId);
+        Task<IReadOnlyList<RentalApplicationResponseDto>> ReviewAllPendingApplicationsAsync(string userId, int CarPostId);
         Task<ApiResponse> SubmitCarFeedbackAsync(string userId, int carPostId, int rating, string feedback);
     }
 }

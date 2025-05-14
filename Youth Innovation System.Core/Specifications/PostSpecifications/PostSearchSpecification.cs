@@ -8,7 +8,7 @@ namespace Youth_Innovation_System.Core.Specifications.PostSpecifications
         public PostSearchSpecification(string? CarType, decimal? RentalPrice, int pageNumber, int pageSize)
             : base(p => (p.RentalStatus == CarStatus.Accepted.ToString()) &&
                 (string.IsNullOrEmpty(CarType) || p.CarType.ToLower().Contains(CarType.ToLower()))
-                  || (RentalPrice == null || p.RentalPrice == RentalPrice))
+                  && (RentalPrice == null || p.RentalPrice == RentalPrice))
         {
             ApplyPaging((pageNumber - 1) * pageSize, pageSize);
             Includes.Add(p => p.postImages);

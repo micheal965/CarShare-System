@@ -27,6 +27,7 @@ import { TextField, Link, Avatar, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import {FormButton} from "./StyledComponents"
 
 const drawerWidth = 240;
 
@@ -234,19 +235,21 @@ export default function MiniDrawer() {
 
 	const mobileMenuId = "primary-search-account-menu-mobile";
 
-	const handleSearchQuery = (ev) => {
+	const handleSearchSubmit = (ev) => {
 		ev.preventDefault();
-		let API_CALL = "/Post/Search-For-Cars?";
-		const query = ev.current.value;
-		if (isNaN(parseInt(query))) {
-			API_CALL += `RentalPrice=${parseInt(query)}`;
+		const raw = ev.target.elements["custom-search"].value.trim();
+		if (!raw) return;
+
+		// 2) Build your API call
+		const params = new URLSearchParams();
+		if (!isNaN(Number(raw))) {
+			params.set("RentalPrice", raw);
+		} else {
+			params.set("CarType", raw);
 		}
-		API_CALL += `CarType=${query}`;
-		navigate("/search-result", {
-			state: {
-				query: API_CALL,
-			},
-		});
+
+		const API_CALL = `/Post/Search-For-Cars?${params.toString()}`;
+		navigate("/search-result", { state: { query: API_CALL } });
 	};
 
 	const renderMobileMenu = (
@@ -325,31 +328,27 @@ export default function MiniDrawer() {
 						color="inherit">
 						Car Share
 					</Link>
-					<Search sx={{ flexGrow: 1 }}>
-						<SearchIconWrapper>
-							<SearchIcon />
-						</SearchIconWrapper>
-						<StyledInputBase
-							disableClearable
-							freeSolo
-							id="custom-search"
-							onChange={(ev) => handleSearchQuery(ev)}
-							disabled={token === null || token === undefined}
-							renderInput={(params) => (
-								<TextField
-									{...params}
-									placeholder="Search…"
-									InputLabelProps={{ shrink: false }}
-									slotProps={{
-										input: {
-											...params.InputProps,
-											type: "search",
-										},
-									}}
-								/>
-							)}
-						/>
-					</Search>
+					<form
+						onSubmit={handleSearchSubmit}
+						style={{ display: "flex", flexGrow: 1 }}>
+						<Search sx={{ flexGrow: 1 }}>
+							<SearchIconWrapper>
+								<SearchIcon />
+							</SearchIconWrapper>
+							<StyledInputBase
+								id="custom-search"
+								name="custom-search"
+								placeholder="Search…"
+								inputProps={{ type: "search" }}
+								disabled={!token}
+								// remove onChange here
+							/>
+						</Search>
+						{/* you can submit via Enter or add a button */}
+						<FormButton type="submit" disabled={!token} sx={{width: 20}}>
+							Go
+						</FormButton>
+					</form>
 					<Box sx={{ flexGrow: 1 }} />
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
 						<Box sx={{ padding: 1 }}>
@@ -463,10 +462,7 @@ export default function MiniDrawer() {
 							href="/posts"
 							disablePadding
 							sx={{
-								display:
-									user?.userRole === "CarOwner"
-										? "block"
-										: "none",
+								display: user?.userRole === "CarOwner" ? "block" : "none",
 								textDecoration: "none",
 								color: theme.palette.text.primary,
 								"&:visited": {
@@ -521,7 +517,7 @@ export default function MiniDrawer() {
 							</ListItemButton>
 						</ListItem>
 					}
-					
+
 					<ListItem
 						key={"Admin Pannel"}
 						component="a"

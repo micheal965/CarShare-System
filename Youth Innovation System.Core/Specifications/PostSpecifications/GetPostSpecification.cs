@@ -6,7 +6,7 @@ namespace Youth_Innovation_System.Core.Specifications.PostSpecifications
     public class GetPostSpecification : BaseSpecification<CarPost>
     {
         public GetPostSpecification(int postId)
-        : base(p => p.Id == postId && p.RentalStatus == CarStatus.Accepted.ToString())
+        : base(p => p.Id == postId && (p.RentalStatus == CarStatus.Accepted.ToString() || p.RentalStatus == CarStatus.Rented.ToString()))
         {
             Includes.Add(p => p.postImages);
             Includes.Add(p => p.CarFeedbacks);

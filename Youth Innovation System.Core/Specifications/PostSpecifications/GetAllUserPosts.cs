@@ -7,14 +7,14 @@ namespace Youth_Innovation_System.Core.Specifications.PostSpecifications
     {
         //For pagination
         public GetAllUserPosts(string userId, int pageNumber, int pageSize)
-        : base(p => p.OwnerId == userId && p.RentalStatus == CarStatus.Accepted.ToString())
+        : base(p => p.OwnerId == userId && (p.RentalStatus == CarStatus.Accepted.ToString() || p.RentalStatus == CarStatus.Rented.ToString()))
         {
             ApplyPaging((pageNumber - 1) * pageSize, pageSize);
             Includes.Add(p => p.postImages);
         }
         //For total count
         public GetAllUserPosts(string userId)
-            : base(p => p.OwnerId == userId && p.RentalStatus == CarStatus.Accepted.ToString())
+        : base(p => p.OwnerId == userId && (p.RentalStatus == CarStatus.Accepted.ToString() || p.RentalStatus == CarStatus.Rented.ToString()))
         {
 
         }

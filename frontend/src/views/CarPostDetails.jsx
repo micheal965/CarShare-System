@@ -28,12 +28,11 @@ export const CarPostDetails = () => {
 	const navigate = useNavigate();
 	const { carId } = location.state;
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [err, setErr] = useState(null);
 	const [post, setPost] = useState(null);
 	const [averageRating, setAverageRating] = useState("0");
 
-	// New rating form state
 	const [newRatingStars, setNewRatingStars] = useState(0);
 	const [newRatingComment, setNewRatingComment] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,12 +43,13 @@ export const CarPostDetails = () => {
 			axiosClient
 				.get(`/Post/Get-Post/${carId}`)
 				.then(({ data }) => {
+					console.log(data);
 					setPost(data);
 					calculateAvaregeFeedBack(data);
-					console.log(data);
 				})
 				.catch((err) => {
 					setErr(err.message);
+					console.log(err);
 				})
 				.finally(() => setLoading(false));
 		};
@@ -58,14 +58,16 @@ export const CarPostDetails = () => {
 	}, [carId]);
 
 	const calculateAvaregeFeedBack = (post) => {
-		if (!post) {
+		if (!post || post.feedbacks.length == 0) {
 			setAverageRating("0");
 		}
 
-		const feedbackCount = post.Feedbacks.length;
+		const feedbacks = post?.feedbacks || [];
+		const feedbackCount = feedbacks.length;
+
 		let feedbackSum = 0;
-		post.Feedbacks.forEach((feedback) => (feedbackSum += feedback.Rating));
-		const average = feedbackSum / feedbackCount;
+		post.feedbacks.forEach((feedback) => (feedbackSum += feedback.rating));
+		const average = feedbackSum > 0 ? feedbackSum / feedbackCount : 0;
 
 		setAverageRating(`${average.toFixed(2)}`);
 	};
@@ -120,7 +122,7 @@ export const CarPostDetails = () => {
 				{ withCredentials: true }
 			);
 			const newRating = data;
-			updateRatingsState([...post.Feedbacks, newRating]);
+			updateRatingsState([...post.feedbacks, newRating]);
 			setNewRatingStars(0);
 			setNewRatingComment("");
 		} catch (error) {
@@ -131,7 +133,6 @@ export const CarPostDetails = () => {
 	};
 
 	const renderRatingReview = (review, index) => {
-
 		return (
 			<React.Fragment key={index}>
 				<ListItem alignItems="flex-start">
@@ -144,7 +145,7 @@ export const CarPostDetails = () => {
 						primary={
 							<>
 								<Rating
-									value={review.stars}
+									value={review.rating}
 									precision={0.5}
 									readOnly
 									size="small"
@@ -154,7 +155,7 @@ export const CarPostDetails = () => {
 									variant="body2"
 									color="text.secondary"
 									sx={{ display: "flex" }}>
-									{review.user?.name || "Anonymous"}
+									{review.feedbackText || "Anonymous"}
 								</Typography>
 							</>
 						}
@@ -164,13 +165,17 @@ export const CarPostDetails = () => {
 									component="div"
 									variant="caption"
 									color="text.secondary">
-									{new Date(review.createdAt).toLocaleDateString()}
+									{
+										new Date(review.submmitedAt)
+											.toLocaleDateString()
+											.split("T")[0]
+									}
 								</Typography>
 							</>
 						}
 					/>
 				</ListItem>
-				{index < post.Feedbacks.length - 1 && <Divider />}
+				{index < post.feedbacks.length - 1 && <Divider />}
 			</React.Fragment>
 		);
 	};
@@ -179,22 +184,30 @@ export const CarPostDetails = () => {
 		<Container>
 			<Paper elevation={3} sx={{ padding: 3, margin: 2 }}>
 				<Stack direction="row" spacing={1} mb={2}>
-					{post.ImageUrls.map((image, index) => (
+					{post.imageUrls.length > 0 ? (
+						post.imageUrls.map((image, index) => (
+							<Avatar
+								key={index}
+								src={image}
+								variant="rounded"
+								sx={{ width: 60, height: 60 }}
+							/>
+						))
+					) : (
 						<Avatar
-							key={index}
-							src={image}
+							src={null}
 							variant="rounded"
 							sx={{ width: 60, height: 60 }}
 						/>
-					))}
+					)}
 				</Stack>
 
 				<Typography variant="h5" gutterBottom>
-					{post.Title}
+					{post.title}
 					<Chip
 						icon={<CheckCircle />}
-						label={post.RentalStatus}
-						color={post.RentalStatus === "Available" ? "success" : "error"}
+						label={post.rentalStatus}
+						color={post.rentalStatus === "Accepted" ? "success" : "error"}
 						sx={{ ml: 2 }}
 					/>
 				</Typography>
@@ -203,25 +216,25 @@ export const CarPostDetails = () => {
 					<Grid2 container spacing={3}>
 						<Grid2 item md={6}>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Car Type:</strong> {post.CarType}
+								<strong>Car Type:</strong> {post.carType}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Brand:</strong> {post.Brand}
+								<strong>Brand:</strong> {post.brand}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Model:</strong> {post.Model}
+								<strong>Model:</strong> {post.model}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Year:</strong> {post.Year}
+								<strong>Year:</strong> {post.year}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Transmission:</strong> {post.Transmission}
+								<strong>Transmission:</strong> {post.transmission}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Description:</strong> {post.Description}
+								<strong>Description:</strong> {post.description}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Rental Price:</strong> {post.RentalPrice}
+								<strong>Rental Price:</strong> {post.rentalPrice}
 							</Typography>
 						</Grid2>
 					</Grid2>
@@ -236,16 +249,18 @@ export const CarPostDetails = () => {
 					<Grid2 container spacing={3}>
 						<Grid2 item md={6}>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Availability Start:</strong> {post.AvailabilityStart}
+								<strong>Availability Start:</strong>{" "}
+								{post.availabilityStart.split("T")[0]}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Availability End:</strong> {post.AvailabilityEnd}
+								<strong>Availability End:</strong>{" "}
+								{post.availabilityEnd.split("T")[0]}
 							</Typography>
 							<Typography variant="subtitle1" gutterBottom>
-								<strong>Location:</strong> {post.Location}
+								<strong>Location:</strong> {post.location}
 							</Typography>
 							<FormButton
-								disabled={post.RentalStatus !== "Available"}
+								disabled={post.rentalStatus !== "Accepted"}
 								variant="contained"
 								className="btn btn-black"
 								onClick={() => navigate(`/add-offer/${carId}`)}>
@@ -265,7 +280,9 @@ export const CarPostDetails = () => {
 					<Grid2 container spacing={3} alignItems="center" mb={3}>
 						<Grid2 item>
 							<Typography variant="h2" component="div">
-								{averageRating}
+								{averageRating || !Number.isNaN(averageRating)
+									? averageRating
+									: "0"}
 							</Typography>
 						</Grid2>
 						<Grid2 item>
@@ -276,13 +293,13 @@ export const CarPostDetails = () => {
 								size="large"
 							/>
 							<Typography variant="body2" color="text.secondary">
-								{post.Feedbacks.length} reviews
+								{post.feedbacks.length} reviews
 							</Typography>
 						</Grid2>
 					</Grid2>
-					{post.Feedbacks && post.Feedbacks.length > 0 ? (
+					{post.feedbacks && post.feedbacks.length > 0 ? (
 						<List>
-							{post.Feedbacks.map((review, index) =>
+							{post.feedbacks.map((review, index) =>
 								renderRatingReview(review, index)
 							)}
 						</List>

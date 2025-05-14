@@ -51,6 +51,7 @@ export const PendingPosts = () => {
 			});
 			const message =
 				"Post " + isAccepted ? "Approved" : "Rejected" + " Successfully";
+				setPendingPosts((prev) => prev.filter((post) => post.id !== postId));
 			setMsg(message);
 		} catch (err) {
 			setErr(err.message || "Something went wrong, please try again later :(");

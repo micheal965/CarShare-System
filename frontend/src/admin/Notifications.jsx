@@ -22,7 +22,7 @@ const Notifications = () => {
 					}
 				);
 				console.log(data)
-				setNotifications(data);
+				setNotifications(data.reverse());
 			} catch (err) {
 				console.log(err);
 			} finally {
@@ -46,19 +46,19 @@ const Notifications = () => {
 	}, [API_URL]);
 
 	useEffect(() => {
-		if (connection) {
-			connection
-				.start()
-				.then(() => {
-					console.log("Connected!");
+			if (connection) {
+				connection
+					.start()
+					.then(() => {
+						console.log("Connected!");
 
-					connection.on("ReceiveNotification", (msg) => {
-						setNotifications((prev) => [...prev, msg]);
-					});
-				})
-				.catch((err) => console.error("Connection failed: ", err));
-		}
-	}, [connection]);
+						connection.on("ReceiveNotification", (msg) => {
+							setNotifications((prev) => [msg, ...prev]);
+						});
+					})
+					.catch((err) => console.error("Connection failed: ", err));
+			}
+		}, [connection]);
 
 	if (loading) {
 		return (
@@ -83,7 +83,7 @@ const Notifications = () => {
 						<ListItem
 							key={message.id}
 							sx={{
-								borderBottom: "1px solid #f0f0f0",
+								borderBottom: "1px solid  #f0f0f0",
 								"&:last-child": {
 									borderBottom: "none",
 								},

@@ -113,7 +113,8 @@ namespace Youth_Innovation_System.Service.CloudinaryServices
                     var uploadParams = new RawUploadParams()
                     {
                         File = new FileDescription(file.FileName, stream),
-                        Folder = "Rentals"
+                        Folder = "Rentals",
+                        Type = "upload"
                     };
 
                     // Upload the file to Cloudinary

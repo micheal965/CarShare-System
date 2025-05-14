@@ -25,20 +25,20 @@ export const EditPostForm = () => {
 	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
-		carOwner: "",
-		title: "",
-		brand: "",
-		model: "",
-		year: "",
-		description: "",
-		carType: "",
-		transmission: "",
-		location: "",
-		rentalStatus: "",
-		availableFrom: "",
-		availableTo: "",
-		price: "",
-		image: null,
+		Id: id,
+		Title: "",
+		Brand: "",
+		Model: "",
+		Year: "",
+		Description: "",
+		CarType: "",
+		Transmission: "",
+		Location: "",
+		RentalStatus: "",
+		AvailabilityStart: "",
+		AvailabilityEnd: "",
+		RentalPrice: "",
+		Images: null,
 	});
 
 	const [fetching, setFetching] = useState(true);
@@ -47,28 +47,34 @@ export const EditPostForm = () => {
 	const [msg, setMsg] = useState(null);
 
 	useEffect(() => {
-		axiosClient
-			.get(`/Post/Get-Post/${id}`)
-			.then(({ data }) => {
-				setFormData({
-					carOwner: data.carOwner,
-					title: data.Title,
-					brand: data.Brand,
-					model: data.Model,
-					year: data.Year.toString(),
-					description: data.Description,
-					carType: data.CarType,
-					transmission: data.Transmission,
-					location: data.Location,
-					rentalStatus: data.RentalStatus,
-					availableFrom: data.AvailabilityStart,
-					availableTo: data.AvailabilityEnd,
-					price: data.RentalPrice.toString(),
-					images: data.ImageUrls,
-				});
-			})
-			.catch(() => setErr("Failed to load car data."))
-			.finally(() => setFetching(false));
+		const fetchPostData = async () => {
+			await axiosClient
+				.get(`/Post/Get-Post/${id}`)
+				.then(({ data }) => {
+					console.log(data);
+					setFormData({
+						Id: id,
+						Title: data.title,
+						Brand: data.brand,
+						Model: data.model,
+						Year: data.year.toString(),
+						Description: data.description,
+						CarType: data.carType,
+						Transmission: data.transmission,
+						Location: data.location,
+						RentalStatus: data.rentalStatus,
+						AvailabilityStart: data.availabilityStart.split("T")[0],
+						AvailabilityEnd: data.availabilityEnd.split("T")[0],
+						RentalPrice: data.rentalPrice.toString(),
+						Images: data.imageUrls,
+					});
+				})
+				.catch((err) => console.log(err))
+				.finally(() => setFetching(false));
+		};
+
+		console.log(id)
+		fetchPostData();
 	}, [id]);
 
 	const handleChange = (e) => {
@@ -77,7 +83,7 @@ export const EditPostForm = () => {
 	};
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
-		setFormData((f) => ({ ...f, image: file }));
+		setFormData((f) => ({ ...f, Images: file }));
 	};
 
 	const handleSubmit = async (e) => {
@@ -95,8 +101,12 @@ export const EditPostForm = () => {
 			}
 		});
 
+
 		try {
-			const { data } = await axiosClient.put(`/cars/${id}`, payload);
+			const { data } = await axiosClient.put("/Post/Update-Post", payload, {
+				headers: { "Content-Type": "multipart/form-data" },
+				withCredentials: true,
+			});
 			setMsg(data.message || "Updated successfully!");
 			navigate(`/car`, {
 				state: {
@@ -140,70 +150,62 @@ export const EditPostForm = () => {
 						<FormTitle variant="h5">Edit Car Post</FormTitle>
 
 						<FormTextField
-							name="carOwner"
-							label="Car Owner"
-							variant="standard"
-							value={formData.carOwner}
-							onChange={handleChange}
-							required
-						/>
-						<FormTextField
-							name="title"
+							name="Title"
 							label="Title"
 							variant="standard"
-							value={formData.title}
+							value={formData.Title}
 							onChange={handleChange}
 							required
 						/>
 						<FormTextField
-							name="brand"
+							name="Brand"
 							label="Brand"
 							variant="standard"
-							value={formData.brand}
+							value={formData.Brand}
 							onChange={handleChange}
 							required
 						/>
 						<FormTextField
-							name="model"
+							name="Model"
 							label="Model"
 							variant="standard"
-							value={formData.model}
+							value={formData.Model}
 							onChange={handleChange}
 							required
 						/>
 						<FormTextField
-							name="year"
+							name="Year"
 							label="Year"
 							type="number"
 							variant="standard"
-							value={formData.year}
+							value={formData.Year}
 							onChange={handleChange}
 							required
 						/>
 
 						<FormTextField
-							name="description"
+							name="Description"
 							label="Description"
 							variant="standard"
 							multiline
 							rows={3}
-							value={formData.description}
+							value={formData.Description}
 							onChange={handleChange}
 						/>
 
 						<FormTextField
-							name="carType"
+							name="CarType"
 							label="Car Type"
 							variant="standard"
-							value={formData.carType}
+							value={formData.CarType}
 							onChange={handleChange}
 						/>
 
 						<FormControl variant="standard" fullWidth>
 							<InputLabel>Transmission</InputLabel>
 							<Select
-								name="transmission"
-								value={formData.transmission}
+								name="Transmission"
+								value={formData.Transmission}
 								onChange={handleChange}
 								required>
 								{["Automatic", "Manual"].map((t) => (
@@ -215,47 +217,46 @@ export const EditPostForm = () => {
 						</FormControl>
 
 						<FormTextField
-							name="location"
+							name="Location"
 							label="Location"
 							variant="standard"
-							value={formData.location}
+							value={formData.Location}
 							onChange={handleChange}
 						/>
 
 						<FormTextField
-							name="availableFrom"
+							name="AvailabilityStart"
 							label="Available From"
 							type="date"
 							variant="standard"
 							InputLabelProps={{ shrink: true }}
-							value={formData.availableFrom}
+							value={formData.AvailabilityStart}
 							onChange={handleChange}
 						/>
 						<FormTextField
-							name="availableTo"
+							name="AvailabilityEnd"
 							label="Available To"
 							type="date"
 							variant="standard"
 							InputLabelProps={{ shrink: true }}
-							value={formData.availableTo}
+							value={formData.AvailabilityEnd}
 							onChange={handleChange}
 						/>
 
 						<FormTextField
-							name="price"
+							name="RentalPrice"
 							label="Price per Day"
 							type="number"
 							variant="standard"
-							value={formData.price}
+							value={formData.RentalPrice}
 							onChange={handleChange}
 							required
 						/>
 
 						<FormButton variant="outlined" component="label">
-							{formData.images && !(formData.images instanceof File)
+							{formData.Images && !(formData.Images instanceof File)
 								? "Change Image"
-								: "Upload Image"
-								}
+								: "Upload Image"}
 							<input
 								hidden
 								accept="image/*"

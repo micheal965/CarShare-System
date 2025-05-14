@@ -2,8 +2,7 @@
 {
     public class RentalApplicationResponseDto
     {
-        public string RenterId { get; set; }
-        public int PostId { get; set; }
+        public int Id { get; set; }
         public DateTime ApplicationDate { get; set; }
         public string LicenseFileUrl { get; set; }
         public string ProposalFileUrl { get; set; }
